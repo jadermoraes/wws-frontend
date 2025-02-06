@@ -1,0 +1,65 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <img src="assets/logo.jpg" id="logoWWS" alt="User Icon" />
+    </div>
+    <div *ngIf="createOtp; else validateOtpTemplate">
+      <!-- Show this if createOtp is true -->
+      <div class="create-verification">
+        <h2 class="title">Secure Your Account</h2>
+        
+        <p class="description">To protect your account, we’ll generate a unique verification code.</p>
+        <p class="instructions">Click below to get the code and scan the QR with your mobile app (e.g., Google Authenticator).</p>
+      
+        <!-- <button type="button" class="request-btn" (click)="requestQrCode()">Request Verification Code</button> -->
+        <button *ngIf="!isLoading && !qrCode" wwsBtn="primary" type="button" class="m-r-md" (click)="requestQrCode()">Request Verification Code</button>
+  
+        <div *ngIf="isLoading" class="loading-btn">
+          <span class="spinner"></span> Loading...
+        </div>
+        
+        <div *ngIf="qrCode" class="qr-image">
+          <img [src]="qrCode" alt="QR Code">
+        </div>
+
+        <button *ngIf="!isLoading && qrCode" wwsBtn="success" type="button" class="m-t-md" (click)="continueToValidation()">I'm all set!</button>
+      </div>
+      
+      
+      
+    </div>
+    
+    <!-- Show this if createOtp is false -->
+    <ng-template #validateOtpTemplate>
+      <div class="passcode-wrapper">
+        <h3 class="passcode-title">Enter Your Passcode</h3>
+        <p class="passcode-description">Please enter the 6-digit passcode on your authicator app.</p>
+    
+        <div class="passcode-input-container">
+          <code-input [isCodeHidden]="false"
+                      [codeLength]="6"
+                      (codeChanged)="onCodeChanged($event)"
+                      (codeCompleted)="onCodeCompleted($event)">
+          </code-input>
+          <div *ngIf="passcodeError" class="passcode-error-message">Invalid passcode. Please try again.</div>
+        </div>
+
+        <div class="grid-row m-b-lg remember-me">
+            <input class="remember-checkbox" type="checkbox" name="rememberMe" [(ngModel)]="rememberMe">
+            <wws-label>Remember me on this device</wws-label>
+        </div>
+    
+        <div class="passcode-actions">
+          <button 
+            class="passcode-submit-btn" 
+            (click)="submitPasscode()"
+            [disabled]="isSubmitDisabled">
+            <span *ngIf="!loading">Submit</span>
+            <div *ngIf="loading" class="passcode-spinner"></div>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    
+  </div>
+</div>

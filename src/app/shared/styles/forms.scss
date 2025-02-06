@@ -1,0 +1,29 @@
+.form-label {
+  font-weight: bold;
+  padding-top: 10px;
+  font-size: 12px;
+}
+
+.form-row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-right: 0;
+  margin-left: 0;
+
+  .col {
+    padding-right: 15px;
+    padding-left: 15px;
+    flex: 1;
+
+    @media (max-width: 768px) {
+      flex-basis: 100%;
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+.input-error {
+  border: #dc3545 0.5px solid;;
+}

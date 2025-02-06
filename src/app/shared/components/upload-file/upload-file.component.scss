@@ -1,0 +1,36 @@
+.uploadfilecontainer {
+  background-image: url("../../../shared/icons/upload-file.svg");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: center;
+  height: 100px;
+  width: 100%;
+  border: 2px dashed #afb1bb;
+  border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 10px;
+  color: #afb1bb;
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}

@@ -1,0 +1,18 @@
+<div class="toasts-wrapper">
+  <div [@inOutAnimation] class="toast p-md m-b-md" *ngFor="let toast of toasts" [style.marginBottom]="'12px'"
+    [style.display]="'block'"
+    [class.toast-success]="toast.type === ToastType.SUCCESS"
+    [class.toast-danger]="toast.type === ToastType.DANGER"
+    [class.toast-warning]="toast.type === ToastType.WARNING">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <img
+        [src]="toast.type === ToastType.SUCCESS ? 'assets/icons/success.png' : (toast.type === ToastType.DANGER ? 'assets/icons/danger2.png' : 'assets/icons/warning3.png')"
+        style="width: 20px; height: 20px;"
+      />
+      <div style="flex-grow: 1; text-align: left; color: white; margin-left: 20px">
+        {{toast.text}}
+      </div>
+      <span *ngIf="toasts.length" (click)="toasts = []" class="exit-button" style="cursor: pointer; color: white;">X</span>
+    </div>
+  </div>
+</div>

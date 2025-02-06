@@ -1,0 +1,36 @@
+@import '../../styles/colors.scss';
+
+.toasts-wrapper {
+  position: fixed;
+  z-index: 3;
+  top: 12px;
+  right: 24px;
+  width: 280px;
+  color: $c-text--white;
+
+  .toast {
+    border: 1px solid $c-border;
+    border-radius: 5px;
+    color: $c-text--white;
+    font-weight: bold;
+
+    &.toast-success {
+      border: 1px solid $c-success;
+      color: white;
+      background-color: rgba($c-success, 0.8);
+      box-shadow: $c-success;
+    }
+
+    &.toast-danger {
+      border: 1px solid $c-danger;
+      background-color: rgba($c-danger, 0.8);
+      box-shadow: $c-danger;
+    }
+
+    &.toast-warning {
+      border: 1px solid $c-warning;
+      background-color: rgba($c-warning, 0.8);
+      box-shadow: $c-warning;
+    }
+  }
+}

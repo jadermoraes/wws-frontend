@@ -1,0 +1,83 @@
+.btn {
+  padding: 6px 16px;
+  line-height: 18px;
+  border-radius: 4px;
+  font-weight: 400;
+  background-color: #007BFF;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    background-color: #0056b3;
+  }
+
+
+  &.btn--small {
+    padding: 2px 8px;
+    line-height: 10px;
+    height: 24px;
+  }
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+
+  &.btn--default {
+    background-color: $c-white;
+    color: $c-text;
+    border: 1px solid $c-border;
+
+    &[disabled] {
+      background-color: inhterit;
+      border: 1px solid $c-border;
+      color: $c-text;
+    }
+  }
+
+  &.btn--primary {
+    background-color: $c-primary;
+    border: 1px solid $c-primary;
+    color: $c-white;
+
+    &[disabled] {
+      background-color: $c-primary--light;
+      border: 1px solid $c-primary--light;
+      color: $c-text--lighter;
+    }
+  }
+
+  &.btn--success {
+    background-color: $c-success;
+    color: $c-white;
+  }
+
+  &.btn--danger {
+    background-color: $c-danger;
+    border: 1px solid $c-danger;
+    color: $c-white;
+
+    &[disabled] {
+      background-color: $c-danger--light;
+      border: 1px solid $c-danger--light;
+      color: $c-text;
+    }
+  }
+
+  &.btn--subtle {
+    border: 1px solid transparent;
+    background-color: transparent;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div
+  class="dropdown"
+  (wwsClickOutside)="showDropdown = false"
+>
+  <div (click)="showDropdown = true">
+    <ng-content select="[wws-dropdown-button]"></ng-content>
+  </div>
+  <div
+    *ngIf="showDropdown"
+    class="dropdown-menu"
+    [class.dropdown-menu-top-right]="position === 'top-right'"
+    [class.dropdown-menu-bottom-left]="position === 'bottom-left'"
+    [class.dropdown-menu-bottom-right]="position === 'bottom-right'"
+    (click)="closeOnClick && (showDropdown = false)"
+  >
+  <div class="dropdown-options">
+    <ng-content select="[wws-dropdown-options]"></ng-content>
+  </div>
+  </div>
+</div>
+
+

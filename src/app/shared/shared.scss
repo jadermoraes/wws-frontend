@@ -1,0 +1,16 @@
+@import './styles/reset.scss';
+
+@import './styles/spacing.scss';
+@import './styles/colors.scss';
+@import './styles/typography.scss';
+@import './styles/grid.scss';
+@import './styles/cursor.scss';
+@import './styles/scrollbar.scss';
+@import './styles/forms.scss';
+
+@import './directives/text/text.directive.scss';
+@import './directives/date/date.directive.scss';
+@import './directives/percentage/percentage.directive.scss';
+@import './directives/number/number.directive.scss';
+@import './directives/select/select.directive.scss';
+@import './directives/btn/btn.directive.scss';

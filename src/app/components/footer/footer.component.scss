@@ -1,0 +1,24 @@
+@import '/src/app/shared/styles/colors.scss';
+
+.footer {
+  display: fixed;
+  width: 100%;
+  background-color: $c-theme;
+  color: $c-theme--text-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  bottom: 0;
+  left: 0;
+  font-size: 12px;
+}
+
+.footer * {
+  margin-bottom: 0px;
+}
+
+.linha {
+  background-color: rgb(255, 166, 0);
+  height: 5px;
+}

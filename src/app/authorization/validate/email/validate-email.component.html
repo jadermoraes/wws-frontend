@@ -1,0 +1,50 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <img src="assets/logo.jpg" id="logoWWS" alt="User Icon" />
+    </div>
+    <div *ngIf="!resend; else resendTemplate">
+      <div class="passcode-wrapper">
+        <h3 class="passcode-title">Enter Your Passcode</h3>
+        <p class="passcode-description">Please enter the 6-digit passcode sent to you.</p>
+    
+        <div class="passcode-input-container">
+          <code-input [isCodeHidden]="false"
+                      [codeLength]="8"
+                      (codeChanged)="onCodeChanged($event)"
+                      (codeCompleted)="onCodeCompleted($event)">
+          </code-input>
+          <div *ngIf="passcodeError" class="passcode-error-message">Invalid passcode. Please try again.</div>
+        </div>
+    
+        <div class="passcode-actions">
+          <button 
+            class="passcode-submit-btn" 
+            (click)="validateUser()"
+            [disabled]="isSubmitDisabled">
+            <span *ngIf="!loading">Submit</span>
+            <div *ngIf="loading" class="passcode-spinner"></div>
+          </button>
+        </div>
+      </div>    
+    </div>
+
+
+    <!-- Show this if createOtp is false -->
+    <ng-template #resendTemplate>
+      <div class="create-verification">
+        <h2 class="title">Validate Your Account</h2>
+        
+        <p class="description">We will send an 8-digit email validation code for your new account.</p>
+      
+        <!-- <button type="button" class="request-btn" (click)="requestQrCode()">Request Verification Code</button> -->
+        <button *ngIf="!isLoading " wwsBtn="primary" type="button" class="m-r-md" (click)="requestVerificationCode()">Request Verification Code</button>
+  
+        <div *ngIf="isLoading" class="loading-btn">
+          <span class="spinner"></span> Loading...
+        </div>
+      </div>
+    </ng-template>
+    
+  </div>
+</div>

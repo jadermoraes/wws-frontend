@@ -1,0 +1,33 @@
+<div class="login-container">
+  <div class="login-form">
+    <div class="logo">
+      <img src="assets/logo.jpg" alt="wws Logo">
+    </div>
+    <h2>Login to WWS</h2>
+    
+    <form #loginForm="ngForm" (ngSubmit)="login(email, password)">
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <input type="text" id="email" [(ngModel)]="email" name="email" required placeholder="example@email.com">
+        <i class="icon-envelope"></i>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required placeholder="********">
+        <i class="icon-eye"></i>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid && loginForm.touched">Login</button>
+    </form>
+
+    <p class="login-link"><a href="/forgot-password">Forgot your password?</a></p>
+
+    <div class="footer-text">
+      <p class="login-link">Don't have an account? <a href="/signup">Sign up</a></p>
+    </div>
+  </div>
+
+  <div class="login-background"></div>
+</div>
+

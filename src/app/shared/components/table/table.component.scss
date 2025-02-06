@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    cursor: pointer;
+    background-color: #f4f4f4;
+  }
+  
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .sortable:hover {
+    background-color: #eaeaea;
+  }
+  

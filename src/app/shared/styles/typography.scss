@@ -1,0 +1,36 @@
+
+h1,
+h2,
+h3,
+h4,
+h5,
+div,
+body,
+html,
+input,
+select,
+label,
+button {
+  color: var(--primary-text-color);
+  background-color: transparent;
+}
+
+.color-danger {
+  color: $c-danger;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-decoration-underline {
+  text-decoration: underline;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}

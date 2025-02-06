@@ -1,0 +1,17 @@
+.input-date-utc {
+  width: 100%;
+  border: 1px solid $c-neutral--light;
+  border-radius: 2px;
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: right;
+  -moz-appearance: textfield;
+
+  &[disabled],
+  &[readonly] {
+    background-color: $c-neutral--lighter;
+  }
+
+
+}

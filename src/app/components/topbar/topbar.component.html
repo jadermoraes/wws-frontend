@@ -1,0 +1,35 @@
+<div class="topbar">
+  <p class="loginho" style="font-size: 8px;">WWS</p>
+
+  <div (mouseenter)="showProfileMenu = true" (mouseleave)="showProfileMenu = false" class="login-layout">
+    <button class="login-button" >
+      <img [src]="profilePicture" alt="Profile Picture" class="profile-pic">
+      <span  *ngIf="isUserLoggedIn">{{name}}</span>
+      <span  class="material-symbols-outlined">
+        arrow_drop_down
+      </span>
+    </button>
+    <div class="profile-menu" [style.display]="showProfileMenu ? 'block' : 'none'">
+      <ul>
+        <div class="menu-login">
+        <li><a href="#">
+          <span  class="material-symbols-outlined">person</span>{{"topbar.profile" | translate}}
+        </a></li>
+      </div>
+      <div class="menu-login">
+        <li><a href="settings/layout">
+          <span  class="material-symbols-outlined">manufacturing</span>{{"topbar.settings" | translate}}
+        </a></li>
+      </div>
+        <div class="menu-login">
+        <li><a href="logout">
+          <span  class="material-symbols-outlined">logout</span>{{"topbar.logout" | translate}}
+        </a></li>
+      </div>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="linha">
+
+</div>

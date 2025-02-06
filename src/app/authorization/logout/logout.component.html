@@ -1,0 +1,11 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <img src="assets/logo.jpg" id="logo" alt="User Icon" />
+    </div>
+    <h2>{{ 'messages.user.sure_logout' | translate}}</h2>
+      <br>
+      <button wwsBtn="primary" type="button" (click)="goback()" class="m-r-md">{{'buttons.back' | translate}}</button>
+      <button wwsBtn="default" type="button" (click)="logout()" class="m-r-md">{{'buttons.logout' | translate}}</button>
+  </div>
+</div>

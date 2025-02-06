@@ -1,0 +1,123 @@
+@import '/src/app/shared/styles/colors.scss';
+
+.topbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  background-color: $c-theme;
+  color: $c-theme--text-white;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  top: 0;
+  left: 0;
+  padding: 0 10px;
+}
+
+.alerta-com-icon {
+  display: flex;
+  align-items: center;
+  color: $c-theme--text-white;
+}
+
+.material-symbols-outlined {
+  color: $c-theme--text-white;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.profile-pic {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.login-layout {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.login-button {
+  background-color: transparent;
+  color: $c-theme--text-white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+  outline: none;
+  margin-bottom: 0;
+  height: 100%;
+}
+
+.login-button:hover {
+  background-color: $c-theme-hover-base;
+}
+
+.login-button .material-symbols-outlined {
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: $c-theme--dark;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  margin-top: -1px;
+  margin-right: 4px;
+}
+
+.profile-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-menu ul li {
+  padding: 10px;
+}
+
+.profile-menu ul li a {
+  color: $c-theme--text-white;
+  text-decoration: none;
+}
+
+.menu-login:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: row;
+    height: 50px;
+  }
+
+  .loginho {
+    display: none;
+  }
+
+  .login-button {
+    display: none;
+  }
+
+  .profile-menu {
+    display: none;
+  }
+
+}

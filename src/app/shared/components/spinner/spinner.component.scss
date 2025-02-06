@@ -1,0 +1,35 @@
+body {
+  text-align: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+}
+
+#loading-spinner {
+  animation: loading-spinner 1s linear infinite;
+}
+
+@keyframes loading-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-spinner-w {
+  animation: loading-spinner-w 1s linear infinite;
+}
+
+@keyframes loading-spinner-w {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+

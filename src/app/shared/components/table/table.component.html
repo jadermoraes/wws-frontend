@@ -1,0 +1,40 @@
+<ng-container *ngIf="sortedData.length > 0; else noDataTemplate">
+    <table>
+      <thead>
+        <tr>
+          <th
+            *ngFor="let header of headers"
+            (click)="sortData(header.key)"
+            [style.width]="header.width"
+            [ngClass]="{ sortable: header.sortable }"
+            [style.text-align]="header.align"
+            [title]="header.tooltip"
+          >
+            {{ header.displayName }}
+            <span *ngIf="sortColumn === header.key">
+              {{ sortDirection === 'asc' ? '▲' : '▼' }}
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of sortedData" (click)="rowClick.emit(row)">
+          <td *ngFor="let header of headers" [style.text-align]="header.align">
+            <ng-container *ngIf="!header.customTemplates; else dynamicTemplate" [ngSwitch]="header.type">
+              <span *ngSwitchCase="'date'">{{ row[header.key] | date: 'shortDate' }}</span>
+              <span *ngSwitchCase="'number'">{{ row[header.key] }}</span>
+              <span *ngSwitchDefault>{{ row[header.key] }}</span>
+            </ng-container>
+          
+            <ng-template #dynamicTemplate>
+              <ng-container *ngTemplateOutlet="getTemplate(row, header); context: { $implicit: row }"></ng-container>
+            </ng-template>
+          </td>          
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noDataTemplate>
+    <ng-content select="[no-data]"></ng-content>
+  </ng-template>
+  

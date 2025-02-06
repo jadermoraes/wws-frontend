@@ -1,0 +1,25 @@
+.tooltip {
+  position: fixed;
+  visibility: hidden;
+  &.visible {
+    visibility: visible;
+  }
+  background-color: rgb(130, 129, 129);
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  padding: 3px 3px;
+  border-radius: 4px;
+}
+
+.tooltip:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgb(130, 129, 129) transparent transparent transparent;
+  top: 18px;
+  left: 50px;
+}

@@ -1,0 +1,62 @@
+
+$c-primary--dark: #263238;
+$c-primary--light: #eeeef0;
+$c-secondary--dark: #2B2B2B;
+$c-primary-text-color--white: #f3f3f3;
+$c-primary-text-color--black: #000000;
+$c-secondary--light: #ECEFF1;
+$c-secondary-text-color--white: #797979;
+$c-secondary-text-color--black: #500202;
+$c-terciary--light-grey: #c1c1c1;
+$c-terciary--dark-grey: #606060;
+$c-primary-border--light: #9b9a9a;
+$c-primary-border--dark: #525151;
+$c-theme--focus-border: #0059ff;
+$c-primary-shadow--light: #8690a3;
+$c-primary-shadow--dark: #110f10;
+$c-line--light-grey: #d6d6d6;
+$c-line--dark-grey: #302f2f; 
+$c-primary-active-light: #99ff00;
+$c-primary-active-dark: #99ff00;
+
+
+
+
+$c-primary: #295abe;
+
+$c-info: #17a2b8;
+$c-success: #37912b;
+$c-success--light: #7dcf85;
+$c-warning: #ffae00;
+$c-danger: #dc3545;
+$c-danger--light: #df7e88;
+
+$c-neutral--dark: #343a40;
+$c-neutral: #6c757d;
+$c-neutral--light: #a3a7aa;
+$c-neutral--lighter: #f4f5f7;
+
+
+$c-white: #fff;
+
+$c-text: #333;
+$c-text--light: #343a40;
+$c-text--lighter: #6c757d;
+$c-text--white: #ffffff;
+
+$c-border: #e0e1e4;
+
+$c-theme: rgb(46, 46, 46);
+$c-theme-hover-base: lighten($c-theme, 30%);
+$c-theme-hover: lighten($c-theme, 60%);
+$c-theme--light: lighten($c-theme, 80%);
+$c-theme--lighter: lighten($c-theme, 80%);
+$c-theme--dark: darken($c-theme, 60%);
+$c-theme--text-grey: rgb(160, 158, 158);
+$c-theme--table: rgb(236, 236, 236);
+$c-theme--text-white: white;
+$c-theme--text-black: black;
+
+$c-theme--range: rgb(129, 129, 129);
+$c-theme-range-light: lighten($c-theme--range, 60%);
+

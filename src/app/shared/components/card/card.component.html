@@ -1,0 +1,22 @@
+<div class="card {{class}}" [ngStyle]="{'height': cardHeight}">
+  <div class="card__header" *ngIf="label">
+    <div class="card__header__label" style="display: flex;">
+      <div *ngIf="showBackButton">
+        <button (click)="back.emit()" wwsBtn="subtle" type="button">
+          <wws-icon icon="arrow-left"></wws-icon>
+        </button>
+      </div>
+      <div>
+        <div>{{label}}</div>
+        <div class="card__header__sublabel" *ngIf="subLabel != ''">{{subLabel}}</div>
+      </div>
+    </div>
+    <ng-content select="[wws-card-header-action]"></ng-content>
+  </div>
+  <div class="card__content" [class.p-md]="!hideContentPadding">
+    <ng-content select="[wws-card-content]"></ng-content>
+  </div>
+  <div class="card__footer" *ngIf="showFooter">
+    <ng-content select="[wws-card-footer]"></ng-content>
+  </div>
+</div>

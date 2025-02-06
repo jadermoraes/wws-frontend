@@ -1,0 +1,57 @@
+@import '../../styles/colors.scss';
+
+.card {
+
+  background-color: $c-white;
+  border: 1px solid $c-border;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+
+  .card__header {
+    background-color: $c-white;
+    padding: 12px 16px;
+    border-bottom: 1px solid $c-border;
+
+    display: flex;
+    justify-content: center;
+
+    .card__header__label {
+      flex-grow: 1;
+      line-height: 32px;
+      font-weight: 700;
+    }
+
+    .card__header__sublabel {
+      flex-grow: 0;
+      line-height: 16px;
+      font-weight: 200;
+      font-size: small;
+      color: gray;
+      text-align: left
+    }
+
+    [wws-card-header-action] {
+      flex-grow: 0;
+    }
+  }
+
+  .card__footer {
+    border-top: 1px solid $c-border;
+    padding: 12px 16px;
+  }
+
+  .card__content {
+    flex-grow: 1;
+    overflow: auto;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .d.unset {
+    display: unset;
+  }
+
+}

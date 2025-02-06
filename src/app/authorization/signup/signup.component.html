@@ -1,0 +1,56 @@
+<div class="signup-container">
+  <div class="signup-form">
+    <h2>Welcome to WWS</h2>
+    
+    <app-profile-picture (onGetPicture)="onGetPicture($event)"></app-profile-picture>
+    <form #signupForm="ngForm" (ngSubmit)="submitForm()">
+
+      <div class="input-group">
+        <label for="firstName">{{'user.firstName' | translate}}</label>
+        <input type="text" id="firstName" [(ngModel)]="firstName" name="name" required placeholder="{{'user.firstName' | translate}}">
+        <i class="icon-envelope"></i>
+      </div>
+
+      <div class="input-group">
+        <label for="lastName">{{'user.lastName' | translate}}</label>
+        <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required placeholder="{{'user.lastName' | translate}}">
+        <i class="icon-envelope"></i>
+      </div>
+
+      
+      <div class="input-group">
+        <label for="role">User Role</label>
+        <select id="role" required [(ngModel)]="role" name="role">
+          <option value="admin">{{'user.role.admin' | translate}}</option>
+          <option value="user">{{'user.role.user' | translate}}</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="email">{{'user.email' | translate}}</label>
+        <input type="text" id="email" [(ngModel)]="email" name="email" required placeholder="example@email.com">
+        <i class="icon-envelope"></i>
+      </div>
+
+      <div class="input-group">
+        <label for="password">{{'user.password' | translate}}</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required placeholder="********" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$">
+        <i class="icon-eye"></i>
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">{{'user.password_confirmation' | translate}}</label>
+        <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="********" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$">
+        <i class="icon-eye"></i>
+      </div>
+
+      <button type="submit" [disabled]="signupForm.invalid && signupForm.touched">{{'buttons.signup' | translate}}</button>
+    </form>
+
+    <div class="footer-text">
+      <p class="signup-link">Already have an account? <a href="/login">{{'buttons.login' | translate}}</a></p>
+    </div>
+  </div>
+
+  <div class="signup-background"></div>
+</div>

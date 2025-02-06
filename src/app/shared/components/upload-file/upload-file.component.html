@@ -1,0 +1,9 @@
+<div class="uploadfilecontainer" (click)="fileInput.click()" dfUpload (onFileDropped)="uploadFile($event)">
+  <input (multiple)="multiple" hidden type="file" [accept]="allowedFileTypes" #fileInput (change)="uploadFile($event.target.files) ">
+</div>
+<div class="files-list" *ngFor="let file of files;let i= index">
+  <p> {{ file.name }} </p>
+  <button class="delete-file" (click)="deleteAttachment(i); $event.stopPropagation();">
+    <wws-icon style="cursor: pointer;" icon="trash"></wws-icon>
+  </button>
+</div>

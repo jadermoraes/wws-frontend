@@ -1,0 +1,168 @@
+<wws-toast></wws-toast>
+<form name="showcase">
+  <wws-card id="btn-showcase" class="m-t-lg" label="Card Example" [showFooter]="true">
+    <div wws-card-content>
+      <div class="grid-container">
+        <p wwsFormElement>
+          <wws-label fontSize="18">Button Showcase</wws-label>
+        </p>
+        <div >
+          <p wwsFormElement>
+            <wws-label [bold]="false">Normal Size</wws-label>
+          </p>
+          <div class="grid-row m-b-lg">
+            <button wwsBtn="default" type="button" class="m-r-md">Default</button>
+            <button wwsBtn="primary" type="button" class="m-r-md">Primary</button>
+            <button wwsBtn="success" type="button" class="m-r-md">Success</button>
+            <button wwsBtn="danger" type="button" class="m-r-md">Danger</button>
+            <button wwsBtn="subtle" type="button" class="m-r-md">Subtle</button>
+          </div>
+        </div>
+        <div>
+          <p wwsFormElement>
+            <wws-label [bold]="false">Small Size</wws-label>
+          </p>
+          <div class="grid-row m-b-lg">
+            <button type="button" wwsBtn="default" type="button" class="m-r-md" wwsBtnSmall="true">Default</button>
+            <button wwsBtn="primary" type="button" class="m-r-md" wwsBtnSmall="true">Primary</button>
+            <button wwsBtn="success" type="button" class="m-r-md" wwsBtnSmall="true">Success</button>
+            <button wwsBtn="danger" type="button" class="m-r-md" wwsBtnSmall="true">Danger</button>
+            <button wwsBtn="subtle" type="button" class="m-r-md" wwsBtnSmall="true">Subtle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div wws-card-footer>
+        <wws-label>Card Footer</wws-label>
+    </div>
+  </wws-card>
+  <wws-card id="input-showcase" class="m-t-lg" label="Input Example" [showFooter]="true">
+    <div wws-card-content>
+      <div class="grid-container">
+        <p wwsFormElement>
+          <wws-label fontSize="18">Input</wws-label>
+        </p>
+        <div >
+          <p wwsFormElement>
+            <wws-label [bold]="false">Fill Inputs</wws-label>
+          </p>
+          <div class="grid-row m-b-lg">
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>text</wws-label>
+                <input type="text" wwsText>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>disabled text</wws-label>
+                <input [disabled]="true" type="text" wwsText>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>number</wws-label>
+                <input type="text" name="amount1" [(ngModel)]="amount1" wwsNumber>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>number custom decimals</wws-label>
+                <input type="text" name="amount2" [wwsNumberDecimals]="3" [(ngModel)]="amount2" wwsNumber>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>number max value (50)</wws-label>
+                <input type="text" name="amount3" [wwsMaxValue]="50" [(ngModel)]="amount3" wwsNumber>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>number min value (10)</wws-label>
+                <input type="text" name="amount4" [wwsMinValue]="10" [(ngModel)]="amount4" wwsNumber>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>number dont allow empty</wws-label>
+                <input type="text" name="amount5" [wwsAllowEmpty]="false" [(ngModel)]="amount5" wwsNumber>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>date input</wws-label>
+                <input type="date" name="date" [(ngModel)]="date" wwsDateUtc>
+              </p>
+            </div>
+            <div class="grid-col-1">
+              <p wwsFormElement>
+                <wws-label>percentage input</wws-label>
+                <input type="text" name="perc" [(ngModel)]="percentage" wwsPercentage>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p wwsFormElement>
+            <wws-label [bold]="false">Select</wws-label>
+          </p>
+          <div class="grid-row m-b-lg">
+            <div class="grid-col-1">
+              <p fsFormElement>
+                <wws-label>Select required</wws-label>
+                <select required name="selecttest" id="selecttest" [(ngModel)]="selectedValue1"
+                wwsSelect [wwsSelectOptions]="listValues" wwsSelectPlaceholder="Select a value"></select>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div wws-card-footer>
+        <wws-label>Card Footer</wws-label>
+    </div>
+  </wws-card>
+
+  <wws-card id="other-showcase" class="m-t-lg" label="Other" [showFooter]="false">
+    <div wws-card-content>
+      <div class="grid-row m-b-lg">
+        <div class="grid-col-2">
+          <p wwsFormElement>
+            <wws-label>Upload File</wws-label>
+            <wws-upload-file [files]="this.files"></wws-upload-file>
+          </p>
+        </div>
+      </div>
+      <div class="grid-row m-b-lg">
+        <p wwsFormElement>
+          <wws-label [bold]="false">Toasts</wws-label>
+        </p>
+        <div class="grid-row m-b-lg">
+          <button wwsBtn="primary" type="button" class="m-l-md m-r-md" (click)="showToast('Success', 'Sucesso!')">Success</button>
+          <button wwsBtn="primary" type="button" class="m-r-md" (click)="showToast('Warning', 'Atenção!')">Warning</button>
+          <button wwsBtn="danger" type="button" class="m-r-md" (click)="showToast('Danger', 'Operação não realizada.')">Danger</button>
+        </div>
+      </div>
+      <div class="grid-row m-b-lg">
+        <p wwsFormElement>
+          <wws-label [bold]="false">Spiner</wws-label>
+        </p>
+        <div class="grid-row m-b-lg">
+          <wws-spinner class="m-l-md"></wws-spinner>
+        </div>
+      </div>
+    </div>
+  </wws-card>
+
+  <!-- <wws-card id="table-showcase" class="m-t-lg" label="Table" [showFooter]="false">
+    <div wws-card-content>
+      <wws-table
+          [cols]="cols"
+          [rows]="rows"
+          [actions]="[]"
+        >
+        </wws-table>
+    </div>
+  </wws-card> -->
+</form>

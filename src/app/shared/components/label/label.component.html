@@ -1,0 +1,7 @@
+<label [ngStyle]="{'font-size': fontSize + 'px', 'font-weight': bold ? '700' : '500'}" class="m-b-xs">
+  <ng-content></ng-content>
+  <span
+    class="m-l-xs color-danger"
+    *ngIf="isRequired"
+  >*</span>
+</label>

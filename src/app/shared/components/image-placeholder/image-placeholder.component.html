@@ -1,0 +1,12 @@
+<span
+  class="image-placeholder"
+  [style.height.px]="size"
+  [style.width.px]="size"
+  [style.backgroundColor]="bgColor"
+>
+  <span
+    *ngIf="label"
+    [style.color]="color"
+    [style.fontWeight]="700"
+  >{{label?.substr(0, 2).toUpperCase()}}</span>
+</span>

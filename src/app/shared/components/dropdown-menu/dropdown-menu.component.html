@@ -1,0 +1,32 @@
+<div class="dropdown-menu">
+  <div
+    *ngFor="let value of data"
+    class="dropdown-menu__item"
+    (mouseenter)="mouseEnterParent($event, value)"
+    [ngClass]="{ 'has-child': value.children?.length }"
+    (click)="sendClickEvent(value[valueName])"
+  >
+    <div
+      class="dropdrop-menu__item-label"
+    >
+      {{ value[labelName] }}
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="mouseoverElement?.children?.length"
+  class="dropdown-child"
+  [style.bottom]="childY + 'px'"
+  [style.left]="childX + 'px'"
+>
+  <div *ngFor="let child of mouseoverElement.children">
+    <div class="dropdown-menu__item"
+    (click)="sendClickEvent(child[valueName])">
+      <div
+        class="dropdrop-menu__item-label"
+      >
+        {{ child[labelName] }}
+      </div>
+    </div>
+  </div>
+</div>
