@@ -39,8 +39,6 @@ export class SessionService {
   }
 
   getUrl() {
-    console.log(environment.apiUrl);
-    console.log(environment);
     return environment.apiUrl;
   }
 
