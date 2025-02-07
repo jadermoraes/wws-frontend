@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserSession } from 'src/app/shared/interfaces/userSession';
 
-import conf from '../../../../proxy.conf.json';
+import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { LayoutUtils } from 'src/app/shared/utils/layout.utils';
 import { LabelValue } from 'src/app/shared/interfaces/labelValue';
@@ -39,7 +39,9 @@ export class SessionService {
   }
 
   getUrl() {
-    return conf['/api/*'].target;//isDevMode() ? conf['/api/*'].target : window.location.origin;
+    console.log(environment.apiUrl);
+    console.log(environment);
+    return environment.apiUrl;
   }
 
   setUserData(data: any): void {
