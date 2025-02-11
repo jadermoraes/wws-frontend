@@ -1,0 +1,15 @@
+<div class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <div #streetViewContainer class="street-view"></div>
+  
+      <div class="modal-footer">
+        <span class="address">📍 {{ "properties.address" | translate}}: {{ address }}</span>
+        <div class="footer-buttons">
+          <button class="close-btn" (click)="closeModal()">Close</button>
+          <button class="select-btn" (click)="captureStreetViewImage()">Select Image</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -26,7 +26,7 @@ import {
       next: HttpHandler
     ): Observable<HttpEvent<any>> {
       let newReq;
-      if (req.url.includes('assets/i18n/')) {
+      if (req.url.includes('assets/i18n/') || req.url.includes('maps.googleapis')) {
         return next.handle(req);
       }
       let token = this.sessionService.getToken();

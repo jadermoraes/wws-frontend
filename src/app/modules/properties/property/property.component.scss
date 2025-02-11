@@ -74,3 +74,12 @@
         // background: lighten(var(--primary-color), 10%);
     }
 }
+
+.property-image {
+    width: 250px;  // Adjust as needed
+    height: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}

@@ -1,15 +1,22 @@
 <form [formGroup]="propertyForm" class="wws-layout grid-container" (ngSubmit)="onSave()">
     <div class="w-100">
         <div class="form-header">
-            <wws-label *ngIf="isNew else editHeader" class="header-title">
-                Add New Property
-            </wws-label>
-            <ng-template #editHeader>
-                <wws-label class="header-title">
-                    View Property <span class="header-highlight">#{{ propertyId }}</span>
-                </wws-label>
-            </ng-template>
-        </div>        
+            <div class="header-content">
+                <ng-container *ngIf="isNew; else editHeader">
+                    <wws-label class="header-title">Add New Property</wws-label>
+                </ng-container>
+                <ng-template #editHeader>
+                    <wws-label class="header-title">
+                        View Property <span class="header-highlight">#{{ propertyId }}</span>
+                    </wws-label>
+                </ng-template>
+                
+                <ng-container *ngIf="!isNew && propertyPicture">
+                    <img [src]="propertyPicture" alt="Property Image" class="property-image">
+                </ng-container>
+            </div>
+        </div>
+                
 
         <div class="grid-row">
             <div class="grid-col-3">
@@ -90,4 +97,6 @@
             </button>
         </div>
     </div>
+    <app-google-map-modal *ngIf="mapsModal && addressForModal" [address]="addressForModal" (onImageSelected)="saveProperty($event)" (onClose)="closeModal()"></app-google-map-modal>
+
 </form>

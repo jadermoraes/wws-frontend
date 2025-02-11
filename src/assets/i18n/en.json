@@ -117,7 +117,8 @@
         "currentRent": "Current rent",
         "reference": "Reference",
         "energyLabel": "Energy label",
-        "energyLabelPlaceholder": "Select energy label"
+        "energyLabelPlaceholder": "Select energy label",
+        "address": "Address"
     },
     "language": "language"
 }

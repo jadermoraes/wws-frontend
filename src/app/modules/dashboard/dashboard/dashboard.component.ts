@@ -52,11 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   isAdmin(): boolean {
-    return this.sessionService.isAdmin();
-  }
-
-  navigateToNewProperty() {
-    this.router.navigate(['/properties/property/create']);
+    return this.sessionService?.isAdmin();
   }
 
   navigateToPropertyList() {

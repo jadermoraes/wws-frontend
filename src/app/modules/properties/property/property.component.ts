@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Property } from 'src/app/shared/interfaces/property';
 import { PropertyService } from '../property.service';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
+import { GoogleMapsService } from 'src/app/shared/services/google-maps.service';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'wws-property',
@@ -16,13 +18,20 @@ export class PropertyComponent implements OnInit {
   isNew: boolean = false;
   propertyForm!: FormGroup;
   isFormValid: boolean = true;
+  latitude: number | null = null;
+  longitude: number | null = null;
+  mapsModal: boolean = false;
+  addressForModal: string = '';
+  propertyPicture: string = '';
 
   constructor(private route: ActivatedRoute, 
     private toastService: ToastService,
     private translate: TranslateService, 
     private fb: FormBuilder,
     private propertyService: PropertyService,
-    private router: Router
+    private googleMapsService: GoogleMapsService,
+    private router: Router,
+    private imageCompress: NgxImageCompressService
   ) { }
 
   ngOnInit() {
@@ -48,12 +57,11 @@ export class PropertyComponent implements OnInit {
 
   async loadPropertyData() {
     this.propertyService.getProperty(this.propertyId).subscribe( propertyData => {
-      console.log(propertyData);
-
       this.propertyForm.patchValue(propertyData);
-    });
-
-    
+      if (propertyData.picture) {
+        this.propertyPicture = propertyData.picture;
+      }
+    });    
   }
 
   getFormattedFormData(): any {
@@ -66,20 +74,60 @@ export class PropertyComponent implements OnInit {
 
   onSave(): void {
     if (this.propertyForm.valid) {
-      const payload = this.getFormattedFormData();
-      this.propertyService.createProperty(payload).subscribe(
-        (property: Property) => {
-          this.toastService.success(this.translate.instant('property.saveSuccess'));
-          this.router.navigate(['/properties/property', property.id]);
-        }, 
-        error => {
-          console.log(error)
-          this.toastService.danger(this.translate.instant('property.saveError'));
-        }
-      );
+      this.openGoogleMapModal();
     } else {
       this.propertyForm.markAllAsTouched();
     }
+  }
+
+  openGoogleMapModal() {
+    const fullAddress = `${this.propertyForm.value.streetName}, ${this.propertyForm.value.propertyNumber} -  ${this.propertyForm.value.place}`;
+    this.addressForModal = fullAddress;
+    this.mapsModal = true;
+  }
+
+  closeModal(): void {
+    this.mapsModal = false
+  }
+
+  async saveProperty(imgUrl) {
+    const payload = this.getFormattedFormData();
+    payload.picture = await this.getPicture(imgUrl);
+    this.propertyService.createProperty(payload).subscribe({
+      next: (data: any) => {
+        this.toastService.success(this.translate.instant('property.saveSuccess'));
+        this.closeModal();
+        this.router.navigate(['/properties/list']);
+      },
+      error: (error: any) => {
+        console.log(error)
+        this.toastService.danger(this.translate.instant('property.saveError'));
+        this.closeModal();
+      }
+    });
+  }
+
+  downloadImage(imageUrl: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.onerror = reject;
+        })
+        .catch(reject);
+    });
+  }
+  
+
+  async getPicture(url: string | undefined): Promise<any> {
+    let picture = await this.downloadImage(url);
+    if (!picture) {
+      return null;
+    }
+    return await this.imageCompress.compressFile(picture, -1, 50, 50);
   }
 
   onReset(): void {

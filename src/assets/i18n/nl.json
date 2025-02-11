@@ -117,7 +117,8 @@
         "currentRent": "Huidige huur",
         "reference": "Referentie",
         "energyLabel": "Energielabel",
-        "energyLabelPlaceholder": "Selecteer energielabel"
+        "energyLabelPlaceholder": "Selecteer energielabel",
+        "address": "Adres"
     },
     "language": "taal"
 }

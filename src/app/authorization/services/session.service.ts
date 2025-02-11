@@ -162,7 +162,7 @@ export class SessionService {
   }
 
   isAdmin(): boolean {
-    return this.role.includes('admin');
+    return this.role?.includes('admin');
   }
 
   // Check if user has a specific role

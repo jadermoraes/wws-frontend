@@ -45,6 +45,7 @@ import { ToggleSwitchComponent } from './components/toggle-switch/toggle-switch.
 import { TranslateModule } from '@ngx-translate/core';
 import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
 import { ImageCropperComponent } from './components/image-cropper/image-cropper.component';
+import { GoogleMapModalComponent } from './components/google-map-modal/google-map-modal.component';
 
 const COMPONENTS_AND_DIRECTIVES = [
   TextDirective,
@@ -84,6 +85,7 @@ const COMPONENTS_AND_DIRECTIVES = [
   ToggleSwitchComponent,
   ProfilePictureComponent,
   ImageCropperComponent,
+  GoogleMapModalComponent
 ];
 
 @NgModule({
