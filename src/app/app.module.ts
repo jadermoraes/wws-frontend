@@ -19,6 +19,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { HttpClient } from '@angular/common/http';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { PropertiesModule } from './modules/properties/properties.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -43,6 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthorizationModule,
     SharedModule,
     SettingsModule,
+    DashboardModule,
+    PropertiesModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

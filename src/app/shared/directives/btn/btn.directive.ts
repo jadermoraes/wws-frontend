@@ -5,7 +5,8 @@ export enum BtnType {
   PRIMARY = 'primary',
   SUCCESS = 'success',
   DANGER = 'danger',
-  SUBTLE = 'subtle'
+  SUBTLE = 'subtle',
+  NONE = 'none'
 }
 
 @Directive({ selector: '[wwsBtn]' })
@@ -18,6 +19,7 @@ export class BtnDirective {
     this.isSuccess = false;
     this.isDanger = false;
     this.isSubtle = false;
+    this.isNone = false;
 
     switch (value) {
       case BtnType.DEFAULT: this.isDefault = true; break;
@@ -25,6 +27,7 @@ export class BtnDirective {
       case BtnType.SUCCESS: this.isSuccess = true; break;
       case BtnType.DANGER: this.isDanger = true; break;
       case BtnType.SUBTLE: this.isSubtle = true; break;
+      case BtnType.NONE: this.isNone = true; break;
       default: this.isDefault = true; break;
     }
   }
@@ -42,6 +45,7 @@ export class BtnDirective {
   @HostBinding('class.btn--danger') isDanger = false;
   @HostBinding('class.btn--subtle') isSubtle = false;
   @HostBinding('class.btn--small') isSmall = false;
+  @HostBinding('class.btn--none') isNone = false;
 
   constructor() { }
 }

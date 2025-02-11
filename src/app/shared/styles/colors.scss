@@ -1,23 +1,25 @@
 
-$c-primary--dark: #263238;
-$c-primary--light: #eeeef0;
+$c-primary--dark: #36393b;
+$c-primary--light: #b0b0b0;
 $c-secondary--dark: #2B2B2B;
 $c-primary-text-color--white: #f3f3f3;
 $c-primary-text-color--black: #000000;
 $c-secondary--light: #ECEFF1;
 $c-secondary-text-color--white: #797979;
 $c-secondary-text-color--black: #500202;
-$c-terciary--light-grey: #c1c1c1;
-$c-terciary--dark-grey: #606060;
-$c-primary-border--light: #9b9a9a;
+$c-terciary--light-grey: #dadada;
+$c-terciary--dark-grey: #686464;
+$c-primary-border--light: #c3c2c2;
 $c-primary-border--dark: #525151;
 $c-theme--focus-border: #0059ff;
 $c-primary-shadow--light: #8690a3;
 $c-primary-shadow--dark: #110f10;
 $c-line--light-grey: #d6d6d6;
 $c-line--dark-grey: #302f2f; 
-$c-primary-active-light: #99ff00;
-$c-primary-active-dark: #99ff00;
+$c-primary-active-light: #607d8b;
+$c-primary-active-dark: #aac8d7;
+$c-secondary-text-color-light: #5f5f5f;
+$c-secondary-text-color-dark: #c6c4c4;
 
 
 
@@ -46,12 +48,12 @@ $c-text--white: #ffffff;
 
 $c-border: #e0e1e4;
 
-$c-theme: rgb(46, 46, 46);
+$c-theme: rgb(74, 74, 74);
 $c-theme-hover-base: lighten($c-theme, 30%);
 $c-theme-hover: lighten($c-theme, 60%);
-$c-theme--light: lighten($c-theme, 80%);
+$c-theme--light: #494848;//lighten($c-theme, 80%);
 $c-theme--lighter: lighten($c-theme, 80%);
-$c-theme--dark: darken($c-theme, 60%);
+$c-theme--dark: #494848;//darken($c-theme, 60%);
 $c-theme--text-grey: rgb(160, 158, 158);
 $c-theme--table: rgb(236, 236, 236);
 $c-theme--text-white: white;

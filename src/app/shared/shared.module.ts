@@ -30,7 +30,6 @@ import { TooltipDirective } from './components/tooltip/tooltip.directive';
 import { DropDirective } from './directives/drag-drop/drop.directive';
 import { DragDirective } from './directives/drag-drop/drag.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HomePageComponent } from '../pages/homepage/homepage.component';
 import { CardComponent } from './components/card/card.component';
 import { DateUtcDirective } from './directives/date-utc/date-utc.directive';
 import { DateDirective } from './directives/date/date.directive';
@@ -74,7 +73,6 @@ const COMPONENTS_AND_DIRECTIVES = [
   ColumnResizeDirective,
   TooltipDirective,
   TooltipComponent,
-  HomePageComponent,
   CardComponent,
   UploadDirective,
   UploadFileComponent,

@@ -1,0 +1,76 @@
+.wws-layout {
+    padding: 30px;
+    max-width: 90%;
+    width: 100%; /* Make sure it doesn't exceed the max width */
+    margin: 50px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: var(--primary-text-color); /* Ensures text color matches the theme */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Adjust to start aligning content to the left */
+  }
+
+.grid-container {
+    display: grid;
+    grid-gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.form-header {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-text-color);
+}
+
+.header-highlight {
+    color: #007bff; /* Highlight color for property ID */
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+  
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--background-color);
+    border-radius: 0 0 8px 8px;
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.2s ease-in-out;
+    }
+
+    .clear-btn {
+        background: var(--secondary-color);
+        color: var(--secondary-text-color);
+    }
+    .clear-btn:hover {
+        // background: lighten(var(--secondary-color), 10%);
+    }
+
+    .save-btn {
+        background: var(--primary-color);
+        color: var(--primary-text-color);
+    }
+    .save-btn:hover {
+        // background: lighten(var(--primary-color), 10%);
+    }
+}

@@ -1,22 +1,90 @@
 .layout-page {
-  padding: 20px;
-  max-width: 50%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
+  padding: 30px;
+  max-width: 700px;  /* Increased width */
+  width: 100%; /* Make sure it doesn't exceed the max width */
+  margin: 50px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--primary-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: var(--primary-text-color); /* Ensures text color matches the theme */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* Adjust to start aligning content to the left */
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: var(--primary-text-color);
 }
 
 .layout-setting-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  font-size: 18px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: var(--tertiary-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  width: 100%; /* Make the layout setting items take full width */
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.setting-label {
+  font-size: 18px;
+  color: var(--primary-text-color);
+  font-weight: 500;
+}
+
+.setting-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid var(--primary-border);
+  border-radius: 4px;
+  background-color: var(--tertiary-color);
+  color: var(--primary-text-color);
+  transition: all 0.3s ease;
+  width: 200px; /* Set a fixed width for the select element */
+}
+
+.setting-select:hover {
+  border-color: var(--primary-color);
+}
+
+.at-toggle-switch {
+  /* Assuming you want to style the toggle switch */
+  .switch-wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  .switch {
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    width: 50px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .switch:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    transition: left 0.3s ease;
+  }
+
+  input:checked + .switch:before {
+    left: 30px;
+  }
 }

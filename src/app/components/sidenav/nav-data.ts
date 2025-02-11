@@ -14,19 +14,19 @@ export class NavbarData {
                 label: this.translate.instant('sidebar.dashboard')
             },
             {
-                routeLink: 'homes',
+                routeLink: 'properties',
                 icon: 'fal fa-home',
                 adminGuard: false,
                 label: this.translate.instant('sidebar.homes.title'),
                 items: [
                     {
-                        routeLink: 'homes/new',
+                        routeLink: 'properties/property/create',
                         icon: 'fal fa-plus-square-o',
                         label: this.translate.instant('sidebar.homes.add'),
                         adminGuard: false,
                     },
                     {
-                        routeLink: 'homes/list',
+                        routeLink: 'properties/list',
                         icon: 'fal fa-list',
                         label: this.translate.instant('sidebar.homes.list'),
                         adminGuard: false,

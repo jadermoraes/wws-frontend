@@ -36,7 +36,6 @@ export class TopbarComponent implements OnInit, OnDestroy {
         this.name = userData?.firstName || '';
         this.profilePicture =
           userData?.profilePicture || './assets/avatar-placeholder.svg';
-          console.log(this.name)
       });
   }
 

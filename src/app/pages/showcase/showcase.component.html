@@ -1,7 +1,7 @@
 <wws-toast></wws-toast>
 <form name="showcase">
-  <wws-card id="btn-showcase" class="m-t-lg" label="Card Example" [showFooter]="true">
-    <div wws-card-content>
+  <wws-card id="btn-showcase" class="m-t-lg" label="Card Example">
+    <div description>
       <div class="grid-container">
         <p wwsFormElement>
           <wws-label fontSize="18">Button Showcase</wws-label>
@@ -36,8 +36,8 @@
         <wws-label>Card Footer</wws-label>
     </div>
   </wws-card>
-  <wws-card id="input-showcase" class="m-t-lg" label="Input Example" [showFooter]="true">
-    <div wws-card-content>
+  <wws-card id="input-showcase" class="m-t-lg" label="Input Example" >
+    <div description>
       <div class="grid-container">
         <p wwsFormElement>
           <wws-label fontSize="18">Input</wws-label>
@@ -124,8 +124,8 @@
     </div>
   </wws-card>
 
-  <wws-card id="other-showcase" class="m-t-lg" label="Other" [showFooter]="false">
-    <div wws-card-content>
+  <wws-card id="other-showcase" class="m-t-lg" label="Other">
+    <div description>
       <div class="grid-row m-b-lg">
         <div class="grid-col-2">
           <p wwsFormElement>
@@ -154,15 +154,4 @@
       </div>
     </div>
   </wws-card>
-
-  <!-- <wws-card id="table-showcase" class="m-t-lg" label="Table" [showFooter]="false">
-    <div wws-card-content>
-      <wws-table
-          [cols]="cols"
-          [rows]="rows"
-          [actions]="[]"
-        >
-        </wws-table>
-    </div>
-  </wws-card> -->
 </form>

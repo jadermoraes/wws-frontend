@@ -1,39 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'wws-card',
   templateUrl: 'card.component.html',
-  styleUrls: ['card.component.scss']
+  styleUrls: ['card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
-export class CardComponent implements OnInit {
+export class CardComponent {
 
-  @Input()
-  showBackButton = false
+  @Input() icon: string = '';
+  @Input() title!: string;
 
-  @Input()
-  label: string;
-
-  @Input()
-  subLabel: string;
-
-  @Input()
-  showFooter = false;
-
-  @Input()
-  cardHeight: string = '100%';
-
-  @Input()
-  class;
-
-  @Input()
-  hideContentPadding = false;
-
-  @Output()
-  back = new EventEmitter<void>();
-
-  constructor() { }
-
-  ngOnInit() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
 }

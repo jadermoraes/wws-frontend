@@ -1,13 +1,14 @@
 <div class="layout-page">
   <h2>Layout</h2>
+  
   <div class="layout-setting-item">
-    <span>Dark Mode</span>
+    <span class="setting-label">Dark Mode</span>
     <at-toggle-switch [(checked)]="isDarkModeEnabled" (checkedChange)="toggle()"></at-toggle-switch>
   </div>
 
   <div class="layout-setting-item">
-    <span>{{"language" | translate }}</span>
-    <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
+    <span class="setting-label">{{"language" | translate }}</span>
+    <select class="setting-select" [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
       <option *ngFor="let language of languages" [value]="language.value">{{ language.label }}</option>
     </select>    
   </div>

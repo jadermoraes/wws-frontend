@@ -3,7 +3,6 @@
   <div class="main-container" [class.minimized]="minimized">
     <app-sidenav *ngIf="isLoggedIn()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
     <div class="content-area">
-      <app-subheader *ngIf="isLoggedIn()"></app-subheader>
       <div class="main-content">
         <router-outlet></router-outlet>
       </div>

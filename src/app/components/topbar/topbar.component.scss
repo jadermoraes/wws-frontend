@@ -1,12 +1,10 @@
-@import '/src/app/shared/styles/colors.scss';
-
 .topbar {
   position: relative;
   z-index: 2;
   display: flex;
   width: 100%;
-  background-color: $c-theme;
-  color: $c-theme--text-white;
+  background-color: var(--theme);
+  color: var(--theme-text-white);
   justify-content: space-between;
   align-items: center;
   height: 50px;
@@ -18,11 +16,11 @@
 .alerta-com-icon {
   display: flex;
   align-items: center;
-  color: $c-theme--text-white;
+  color: var(--theme-text-white);
 }
 
 .material-symbols-outlined {
-  color: $c-theme--text-white;
+  color: var(--theme-text-white);
   font-size: 16px;
   margin-right: 8px;
 }
@@ -50,7 +48,7 @@ p {
 
 .login-button {
   background-color: transparent;
-  color: $c-theme--text-white;
+  color: var(--theme-text-white);
   border: none;
   cursor: pointer;
   display: flex;
@@ -63,7 +61,7 @@ p {
 }
 
 .login-button:hover {
-  background-color: $c-theme-hover-base;
+  background-color: var(--theme-hover-base)
 }
 
 .login-button .material-symbols-outlined {
@@ -75,7 +73,7 @@ p {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: $c-theme--dark;
+  background-color: var(--theme);
   border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: none;
@@ -94,7 +92,7 @@ p {
 }
 
 .profile-menu ul li a {
-  color: $c-theme--text-white;
+  color: var(--primary-text-color);
   text-decoration: none;
 }
 

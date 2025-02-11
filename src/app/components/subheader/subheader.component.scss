@@ -1,41 +1,10 @@
 
-
-.breadcrumb {
+.subheader {
   background: inherit;
   list-style: none;
   padding: 15px;
-  padding-top: 20px;
   padding-bottom: 20px;
   display: flex;
   margin-bottom: 20px;
   border-bottom: 1px solid var(--secondary-text-color);
-
-
-
-  .breadcrumb-item {
-    color: var(--primary-text-color);
-    font-size: 16px;
-    font-style: bold;
-    font-weight: 600;
-
-    &:not(:last-child) {
-      &::after {
-        color: inherit;
-        margin: 0 5px;
-      }
-    }
-
-    a {
-      color: var(--primary-text-color);
-      text-decoration: none;
-      transition: color 0.3s;
-      &:hover {
-        color: darken(#999b9e, 10%);
-      }
-    }
-
-    &.active {
-      color: var(--primary-text-color);
-    }
-  }
 }

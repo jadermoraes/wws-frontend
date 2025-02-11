@@ -1,0 +1,30 @@
+.users-page {
+    padding: 20px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    margin: 0;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: lighter;
+    font-size: large;
+}
+
+.navigate-button {
+    min-width: 150px;
+    text-align: center;
+}
+
+  

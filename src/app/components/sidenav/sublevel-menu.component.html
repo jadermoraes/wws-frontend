@@ -29,6 +29,7 @@
           [routerLink]="[item.routeLink]"
           routerLinkActive="active-sublevel"
           [routerLinkActiveOptions]="{exact: true}"
+          [ngClass]="getActiveClass(item)"
         >
           <ng-container *ngIf="item.icon; else defaultIcon">
               <i class="sidenav-link-icon" [class]="item.icon"></i>

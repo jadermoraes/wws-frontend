@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -8,37 +8,12 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./subheader.component.scss']
 })
 export class SubheaderComponent implements OnInit {
-  breadcrumbs: { label: string; url: string }[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
+  @ContentChild(TemplateRef) contentTemplate!: TemplateRef<any>;
+  @Input() template!: TemplateRef<any>;
+
   ngOnInit() {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.breadcrumbs = this.createBreadcrumbs(this.route.root);
-    });
-  }
-
-  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: { label: string; url: string }[] = []): { label: string; url: string }[] {
-    const children: ActivatedRoute[] = route.children;
-
-    if (children.length === 0) {
-      return breadcrumbs;
-    }
-
-    for (const child of children) {
-      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
-      if (routeURL !== '') {
-        url += `/${routeURL}`;
-      }
-
-      const label = child.snapshot.data['breadcrumb'];
-      if (label) {
-        breadcrumbs.push({ label, url });
-      }
-
-      return this.createBreadcrumbs(child, url, breadcrumbs);
-    }
-
-    return breadcrumbs;
   }
 }

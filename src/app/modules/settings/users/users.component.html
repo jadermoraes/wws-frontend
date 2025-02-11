@@ -16,8 +16,13 @@
     </wws-table>
   </div>  
 
-  <ng-template #actionTemplateUser let-row>
+  <ng-template #actionTemplateUserActive let-row>
     <button wwsBtn="primary" type="button">{{ 'buttons.disable' | translate }}</button>
+  </ng-template>
+
+
+  <ng-template #actionTemplateUserInactive let-row>
+    <button wwsBtn="primary" type="button">{{ 'buttons.enable' | translate }}</button>
   </ng-template>
 
   <ng-template #actionTemplateInvite let-row>

@@ -32,13 +32,15 @@ export class UsersComponent implements OnInit {
   showInviteModal: boolean = false;
   roles = defaultRoles;
 
-  @ViewChild('actionTemplateUser', { static: false }) actionTemplateUser!: TemplateRef<any>;
+  @ViewChild('actionTemplateUserActive', { static: false }) actionTemplateUserActive!: TemplateRef<any>;
+  @ViewChild('actionTemplateUserInactive', { static: false }) actionTemplateUserInactive!: TemplateRef<any>;
   @ViewChild('actionTemplateInvite', { static: false }) actionTemplateInvite!: TemplateRef<any>;
 
   ngOnInit(): void {
     this.usersService.getUsers().subscribe((data) => {
       data.headers.find(h => h.key === 'actions').customTemplates = {
-        'userActions': this.actionTemplateUser,
+        'userActionsActive': this.actionTemplateUserActive,
+        'userActionsInactive': this.actionTemplateUserInactive,
         'inviteActions': this.actionTemplateInvite
       }
       this.userTable = data;

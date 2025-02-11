@@ -33,6 +33,7 @@ body {
 
 /* Tema claro */
 .light-theme {
+  --theme: #{$c-theme--light};
   --primary-color: #{$c-primary--light};
   --primary-text-color: #{$c-primary-text-color--black};
   --secondary-color: #{$c-secondary--light};
@@ -43,17 +44,25 @@ body {
   --primary-shadow: #{$c-primary-shadow--light};
   --primary-line:#{$c-line--light-grey};
   --primary-active: #{$c-primary-active-light};
-
-
   --table-tbody1:	#eceff1;
   --table-tbody2:	#fafafa;
-  --table-hover:	#ccc8c8;
+  --table-hover:	#dddddd;
   --table-border: #e0e0e0;
   --table-thead: #f5f5f5;
+
+  --theme-hover-base: #{$c-theme-hover-base};
+  --theme-hover: #{$c-theme-hover};
+  --theme-lighter: #{$c-theme--lighter};
+  --theme-text-grey: #{$c-theme--text-grey};
+  --theme-table: #{$c-theme--table};
+  --theme-text-white: #{$c-theme--text-white};
+  --theme-text-black: #{$c-theme--text-black};
+  --theme-second-text-color: #{$c-secondary-text-color-light};
 }
 
 /* Tema escuro */
 .dark-theme {
+  --theme: #{$c-theme--dark};
   --primary-color: #{$c-primary--dark};
   --primary-text-color: #{$c-primary-text-color--white};
   --secondary-color: #{$c-secondary--dark};
@@ -69,6 +78,15 @@ body {
   --table-hover:	#3a3838;
   --table-border: rgb(78, 75, 75)0;
   --table-thead: #423f3f;
+  
+  --theme-hover-base: #{$c-theme-hover-base};
+  --theme-hover: #{$c-theme-hover};
+  --theme-lighter: #{$c-theme--lighter};
+  --theme-text-grey: #{$c-theme--text-grey};
+  --theme-table: #{$c-theme--table};
+  --theme-text-white: #{$c-theme--text-white};
+  --theme-text-black: #{$c-theme--text-black};
+  --theme-second-text-color: #{$c-secondary-text-color-dark};
 }
 
 .text-danger {
@@ -114,7 +132,7 @@ input[type="number"] {
   border-radius: 4px;
   height: 36px;
   width: 100%;
-  border: 1px solid var(--primary-border);
+  border: 1px solid var(--tertiary-color);
 }
 
 input[type="text"]:focus,
@@ -123,7 +141,8 @@ input[type="tel"]:focus,
 input[type="number"]:focus {
   outline: none;
 
-  border: none;
+  // border: none;
+  border: 1px solid var(--primary-active);
   background-color: transparent;
   color: var(--primary-text-color);
 }
@@ -375,4 +394,12 @@ button {
   padding: 10px;
   background-color: var(--tertiary-color);
   border-radius: 5px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.right-text {
+  text-align: right;
 }

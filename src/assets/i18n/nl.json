@@ -24,6 +24,16 @@
         "settings": "Instellingen",
         "logout": "Uitloggen"
     },
+    "errors": {
+        "required": "Dit veld is verplicht",
+        "email": "Dit veld moet een geldig emailadres zijn",
+        "min_length": "Dit veld moet minstens {{value}} karakters zijn",
+        "max_length": "Dit veld mag maximaal {{value}} karakters zijn",
+        "confirmed": "Dit veld moet bevestigd worden",
+        "unique": "Dit veld moet uniek zijn",
+        "invalidNumber": "Dit veld moet een geldig nummer zijn"
+
+    },
     "messages": {
         "passwords": {
             "password": "Wachtwoord",
@@ -77,7 +87,37 @@
         "confirm": "Bevestigen",
         "logout": "Uitloggen",
         "signup": "Aanmelden",
-        "invite": "Uitnodigen"
+        "invite": "Uitnodigen",
+        "update": "Bijwerken"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "homes": "Huizen",
+        "listedHomes": "Je hebt {{value}} genoteerde huizen",
+        "viewList": "Bekijk lijst"
+    }, 
+    "properties": {
+        "title": "Eigenschappen",
+        "add": "Nieuwe toevoegen",
+        "edit": "Bewerken",
+        "delete": "Verwijderen",
+        "disable": "Uitschakelen",
+        "enable": "Inschakelen",
+        "list": "Lijst",
+        "view": "Bekijken",
+        "name": "Naam",
+        "city": "Stad",
+        "postalCode": "Postcode",
+        "country": "Land",
+        "propertyNumber": "Huisnummer",
+        "propertyLetter": "Huisletter",
+        "propertyNumberAddition": "Huisnummer toevoeging",
+        "streetName": "Straatnaam",
+        "place": "Plaats",
+        "currentRent": "Huidige huur",
+        "reference": "Referentie",
+        "energyLabel": "Energielabel",
+        "energyLabelPlaceholder": "Selecteer energielabel"
     },
     "language": "taal"
 }

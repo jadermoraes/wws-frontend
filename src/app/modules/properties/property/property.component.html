@@ -1,0 +1,93 @@
+<form [formGroup]="propertyForm" class="wws-layout grid-container" (ngSubmit)="onSave()">
+    <div class="w-100">
+        <div class="form-header">
+            <wws-label *ngIf="isNew else editHeader" class="header-title">
+                Add New Property
+            </wws-label>
+            <ng-template #editHeader>
+                <wws-label class="header-title">
+                    View Property <span class="header-highlight">#{{ propertyId }}</span>
+                </wws-label>
+            </ng-template>
+        </div>        
+
+        <div class="grid-row">
+            <div class="grid-col-3">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.postalCode' | translate }}</wws-label>
+                    <input type="text" wwsText formControlName="zipCode" [maxlength]="20">
+                    <span class="error" *ngIf="hasError('zipCode', 'required')">{{ 'errors.required' | translate }}</span>
+                    <span class="error" *ngIf="hasError('zipCode', 'minlength')">{{ 'errors.min_length' | translate }}</span>
+                </p>
+            </div>
+
+            <div class="grid-col-3">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.propertyNumber' | translate }}</wws-label>
+                    <input type="text" wwsNumber formControlName="propertyNumber" class="right-text p-r-sm">
+                    <span class="error" *ngIf="hasError('propertyNumber', 'required')">{{ 'errors.required' | translate }}</span>
+                    <span class="error" *ngIf="hasError('propertyNumber', 'pattern')">{{ 'errors.invalidNumber' | translate }}</span>
+                </p>
+            </div>
+
+            <div class="grid-col-3">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.propertyLetter' | translate }}</wws-label>
+                    <input type="text" wwsText formControlName="propertyLetter" [maxlength]="1">
+                </p>
+            </div>
+
+            <div class="grid-col-3">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.propertyNumberAddition' | translate }}</wws-label>
+                    <input type="text" wwsText formControlName="propertyNumberAddition" [maxlength]="1">
+                </p>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="grid-col-7">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.streetName' | translate }}</wws-label>
+                    <input type="text" wwsText formControlName="streetName">
+                    <span class="error" *ngIf="hasError('streetName', 'required')">{{ 'errors.required' | translate }}</span>
+                </p>
+            </div>
+
+            <div class="grid-col-5">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.place' | translate }}</wws-label>
+                    <input type="text" wwsText formControlName="place">
+                    <span class="error" *ngIf="hasError('place', 'required')">{{ 'errors.required' | translate }}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="grid-col-4">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.currentRent' | translate }}</wws-label>
+                    <input type="text" wwsNumber formControlName="currentRent" class="right-text p-r-sm">
+                    <span class="error" *ngIf="hasError('currentRent', 'required')">{{ 'errors.required' | translate }}</span>
+                    <span class="error" *ngIf="hasError('currentRent', 'pattern')">{{ 'errors.invalidNumber' | translate }}</span>
+                </p>
+            </div>
+
+            <div class="grid-col-8">
+                <p wwsFormElement>
+                    <wws-label>{{ 'properties.reference' | translate }}</wws-label>
+                    <input type="text" wwsText formControlName="reference">
+                </p>
+            </div>
+        </div>
+
+        <div *ngIf="isNew" class="form-footer">
+            <button type="button" wwsBtn="default" (click)="onReset()">
+                {{ "buttons.reset" | translate }}
+            </button>
+            <button type="submit" wwsBtn="primary" [disabled]="propertyForm.invalid">
+                {{ (isNew ? "buttons.save" : "buttons.update") | translate }}
+            </button>
+        </div>
+    </div>
+</form>

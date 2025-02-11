@@ -1,0 +1,27 @@
+<app-subheader style="width: 100%;">
+  <div class="custom-header">
+    <div class="header-left">
+      Welcome, {{ username }}!
+    </div>
+    <div class="header-right">
+      <button wwsBtn="success" type="button" class="m-r-md" (click)="navigateToNewProperty()">New Calculation</button>
+      <button *ngIf="isAdmin()" wwsBtn="primary" type="button" class="m-r-md" href="settings/users">Invite user</button>
+    </div>
+  </div>
+</app-subheader>
+
+<div class="grid-container">
+  <wws-card 
+    [icon]="'fa fa-home'" 
+    [title]="homes" 
+    [attr.key]="homes"
+    style="width: 100%;">
+    <div description>
+      <p class="description">{{listedHouses}}</p>
+    </div>
+    <div footer style="text-align: center;">
+      <button class="description" wwsBtn="none" style="width: 100%;" (click)="navigateToPropertyList()">{{"dashboard.viewList" | translate}}</button>
+    </div>
+  </wws-card>
+</div>
+

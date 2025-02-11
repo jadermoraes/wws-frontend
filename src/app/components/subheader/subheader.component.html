@@ -1,13 +1,9 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li *ngFor="let breadcrumb of breadcrumbs; let last = last"
-        class="breadcrumb-item"
-        [class.active]="last"
-        [attr.aria-current]="last ? 'page' : null">
-      <ng-container *ngIf="!last; else lastTemplate">
-        <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
-      </ng-container>
-      <ng-template #lastTemplate>{{ breadcrumb.label }}</ng-template>
-    </li>
-  </ol>
-</nav>
+<div class="subheader">
+  <ng-container *ngIf="template; else projectedContent">
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </ng-container>
+
+  <ng-template #projectedContent>
+    <ng-content></ng-content>
+  </ng-template>
+</div>

@@ -108,3 +108,26 @@ app-subheader,
     grid-template-columns: 1fr;
   }
 }
+
+
+:host ::ng-deep .custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-left {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+.header-right {
+  display: flex;
+  margin-left: auto;
+}
+
+.description {
+  color: var(--primary-text-color);
+}

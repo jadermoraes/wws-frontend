@@ -18,6 +18,7 @@ export class SessionService {
   private role: string;
   private permissions: string[] = [];
   private preferences: Record<string, any> = {};
+  private userData: UserSession;
   private userEmail?: string;
   private userIsAdmin?: boolean;
   private userDataSubject = new BehaviorSubject<UserSession>(null);
@@ -66,6 +67,7 @@ export class SessionService {
 
   clearSession() {
     this.setUserData(null)
+    this.userData = null;
     localStorage.clear();
   }
 
@@ -85,6 +87,7 @@ export class SessionService {
   setUserDataSession(data: UserSession) {
     this.role = data.role;
     this.setUserData(data);
+    this.userData = data;
     // this.permissions = data.userPreferences.permissions.map;
     this.preferences = data.userPreferences.reduce((acc: Record<string, any>, item: LabelValue) => {
       acc[item.label] = item.value;
@@ -223,6 +226,11 @@ export class SessionService {
 
   resendVerificationCode() {
     return this.http.post('/auth/verification-code/resend', {sessionId: localStorage.getItem('sessionId')})
+  }
+
+  getUserName() {
+    console.log(this.userData);
+    return this.userData?.firstName + ' ' + this.userData?.lastName;
   }
 
 }

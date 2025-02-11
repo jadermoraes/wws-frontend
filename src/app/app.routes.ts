@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './pages/homepage/homepage.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { authorizationGuard } from './authorization/guards/authorization.guard';
 import { ShowcaseComponent } from './pages/showcase/showcase.component';
 import { authorizationRoutes } from './authorization/authorization.routes';
+import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -18,7 +18,14 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'dashboard', component: HomePageComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Início' } },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Início' } },
+      {
+        path: 'properties',
+        loadChildren: () =>
+          import('./modules/properties/properties.module').then(
+            (m) => m.PropertiesModule
+          ),
+      },
       {
         path: 'settings',
         loadChildren: () =>

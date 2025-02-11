@@ -43,6 +43,7 @@ export class SublevelMenuComponent implements OnInit {
   }
 
   handleClick(item: any): void {
+    // debugger
     if (!this.multiple) {
       if (this.data.items && this.data.items.length > 0) {
         for(let modelItem of this.data.items) {
@@ -56,9 +57,10 @@ export class SublevelMenuComponent implements OnInit {
   }
 
   getActiveClass(item: INavbarData): string {
-    return item.expanded && this.router.url.includes(item.routeLink)
-      ? 'active-sublevel'
-      : '';
+    let acitveClass = this.router.url.includes(item.routeLink)
+    ? 'active-sublevel'
+    : '';
+    return acitveClass;
   }
 
 }

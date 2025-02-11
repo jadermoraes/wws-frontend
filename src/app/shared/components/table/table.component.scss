@@ -2,21 +2,27 @@ table {
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
+    background-color: var(--secondary-color)
   }
   
   th,
   td {
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--tertiary-color);
   }
   
   th {
     cursor: pointer;
-    background-color: #f4f4f4;
+    background-color: var(--theme);
+    color: var(--theme-text-white);
+  }
+
+  tr {
+    color: var(--theme-second-text-color);
   }
   
   tr:hover {
-    background-color: #f9f9f9;
+    background-color: var(--table-hover);
   }
   
   .text-right {
@@ -28,6 +34,6 @@ table {
   }
   
   .sortable:hover {
-    background-color: #eaeaea;
+    background-color: color-mix(in srgb, var(--theme) 80%, white);
   }
   

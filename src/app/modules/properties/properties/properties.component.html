@@ -1,0 +1,23 @@
+<div class="properties-page">
+    <div class="title-container">
+      <h2 class="title">{{ 'properties.title' | translate }}</h2>
+      <button wwsBtn="primary" type="button" class="navigate-button" (click)="navigateToProperty('create')">
+        {{ 'properties.add' | translate }}
+      </button>
+    </div>
+  
+    <div *ngIf="propertyList">
+        <wws-table
+          [headers]="propertyList.headers"
+          [data]="propertyList.rows"
+          (rowClick)="onRowClick($event)"
+        >
+          <p no-data>No items to display!</p>
+        </wws-table>
+      </div>    
+  
+    <ng-template #actionProperties let-row>
+      <button wwsBtn="primary" type="button" (click)="navigateToProperty(row.id)">{{ 'properties.view' | translate }}</button>
+    </ng-template>
+       
+  </div>

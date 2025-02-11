@@ -1,10 +1,9 @@
-@import '/src/app/shared/styles/colors.scss';
 
 .footer {
   display: fixed;
   width: 100%;
-  background-color: $c-theme;
-  color: $c-theme--text-white;
+  background-color: var(--theme);
+  color: var(--theme-text-white);
   display: flex;
   justify-content: center;
   align-items: center;
