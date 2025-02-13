@@ -55,7 +55,13 @@
             "not_created": "User not created",
             "logout": "You have been logged out",
             "sure_logout": "Are you sure you want to logout?"
-        }
+        },
+        "invalidFirstName": "First name is required.",
+        "invalidLastName": "Last name is required.",
+        "invalidEmail": "Please enter a valid email address.",
+        "invalidPassword": "Password must contain at least 8 characters, including a letter, a number, and a special character.",
+        "passwords.dont_match": "Passwords do not match.",
+        "invalidRole": "Please select a valid user role."
     },
     "user": {
         "firstName": "First name",

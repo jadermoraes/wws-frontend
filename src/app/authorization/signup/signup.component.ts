@@ -1,78 +1,89 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { SessionService } from '../services/session.service';
-import { DataUrl, NgxImageCompressService } from 'ngx-image-compress';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-
-  constructor(private toastService: ToastService, private sessionService: SessionService, private translate: TranslateService, private imageCompress: NgxImageCompressService) { }
-
-  firstName: string | undefined;
-  lastName: string | undefined;
-  email: string | undefined;
-  role: string | undefined;
-  password: string | undefined;
-  confirmPassword: string | undefined;
+  signupForm: FormGroup;
   picture: string | undefined;
 
-  async submitForm() {
-    if (this.password !== this.confirmPassword) {
-      this.toastService.warning(this.translate.instant('messages.passwords.dont_match'));
-      return;
-    }
-
-  
-    let profilePicture = await this.getProfilePicture(this.picture);
-    let newUser = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      role: this.role,
-      password: this.password,
-      confirmPassword: this.confirmPassword,
-    };
-
-    if (profilePicture) {
-      newUser['profilePicture'] = profilePicture;
-    }
-    
-    // Call the API to create a new user
-    this.sessionService.signup(newUser).subscribe({
-      next: (data: any) => {
-        this.toastService.success(this.translate.instant('messages.user.created'));
-        this.sessionService.redirectToLogin();
+  constructor(
+    private fb: FormBuilder,
+    private toastService: ToastService,
+    private sessionService: SessionService,
+    private translate: TranslateService,
+    private imageCompress: NgxImageCompressService
+  ) {
+    this.signupForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        role: ['', Validators.required],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$'),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
       },
-      error: (error: any) => {
-        console.log(JSON.stringify(error));
-        if (error.status === 400) {
-          this.toastService.danger(this.translate.instant('messages.user.not_created' + ': ' + JSON.stringify(error.error.message)));
-        } else {
-          this.toastService.danger(this.translate.instant('messages.user.not_created'));
-        }
-      }
-    });
-  }
-
-  onGetPicture(base64Pic) {
-    this.picture = base64Pic;
+      { validator: this.passwordsMatchValidator }
+    );
   }
 
   ngOnInit(): void {
-    this.translate.onLangChange.subscribe({
-      next: async (lang: any) => {
-    }});
+    this.translate.onLangChange.subscribe(() => {});
+  }
+
+  async submitForm() {
+    if (this.signupForm.invalid) {
+      this.toastService.warning(this.translate.instant('messages.form.invalid'));
+      return;
+    }
+
+    const profilePicture = await this.getProfilePicture(this.picture);
+    const newUser = { ...this.signupForm.value };
+    if (profilePicture) {
+      newUser.profilePicture = profilePicture;
+    }
+
+    this.sessionService.signup(newUser).subscribe({
+      next: () => {
+        this.toastService.success(this.translate.instant('messages.user.created'));
+        this.sessionService.redirectToLogin();
+      },
+      error: (error) => {
+        this.toastService.danger(error.error.message);
+      },
+    });
+  }
+
+  onGetPicture(base64Pic: string) {
+    this.picture = base64Pic;
   }
 
   async getProfilePicture(picture: string | undefined): Promise<any> {
-    if (!picture) {
-      return null;
+    return picture ? this.imageCompress.compressFile(picture, -1, 50, 50) : null;
+  }
+
+  // Custom validator for password match
+  passwordsMatchValidator(control: AbstractControl) {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    if (password && confirmPassword && password !== confirmPassword) {
+      control.get('confirmPassword')?.setErrors({ mismatch: true });
+    } else {
+      control.get('confirmPassword')?.setErrors(null);
     }
-    return await this.imageCompress.compressFile(picture, -1, 50, 50);
+    return null;
   }
 }

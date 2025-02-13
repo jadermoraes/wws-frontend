@@ -55,7 +55,13 @@
             "not_created": "Gebruiker niet aangemaakt",
             "logout": "Je bent uitgelogd",
             "sure_logout": "Weet je zeker dat je wilt uitloggen?"
-        }
+        },
+        "invalidFirstName": "Voornaam is verplicht.",
+        "invalidLastName": "Achternaam is verplicht.",
+        "invalidEmail": "Voer een geldig e-mailadres in.",
+        "invalidPassword": "Wachtwoord moet minstens 8 tekens bevatten, inclusief een letter, een nummer en een speciaal teken.",
+        "passwords.dont_match": "Wachtwoorden komen niet overeen.",
+        "invalidRole": "Selecteer een geldige gebruikersrol."
     },
     "user": {
         "firstName": "Voornaam",
