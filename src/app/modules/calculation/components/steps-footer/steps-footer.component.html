@@ -1,0 +1,34 @@
+<div class="calculation-footer">
+  <div class="footer-section left">
+    <button 
+      *ngFor="let action of leftActions"
+      [wwsBtn]="action.type"
+      (click)="handleAction(action)"
+      [disabled]="action.disabled"
+      [style.width]="action.width">
+      {{ action.label }}
+    </button>
+  </div>
+  
+  <div class="footer-section center">
+    <button 
+      *ngFor="let action of centerActions"
+      [wwsBtn]="action.type"
+      (click)="handleAction(action)"
+      [disabled]="action.disabled"
+      [style.width]="action.width">
+      {{ action.label }}
+    </button>
+  </div>
+  
+  <div class="footer-section right">
+    <button 
+      *ngFor="let action of rightActions"
+      [wwsBtn]="action.type"
+      (click)="handleAction(action)"
+      [disabled]="action.disabled"
+      [style.width]="action.width">
+      {{ action.label }}
+    </button>
+  </div>
+</div>

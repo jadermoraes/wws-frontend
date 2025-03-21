@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +21,20 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { PropertiesModule } from './modules/properties/properties.module';
+import { CalculationModule } from './modules/calculation/calculation.module';
+
+import Bugsnag from '@bugsnag/js'
+import BugsnagPerformance from '@bugsnag/browser-performance'
+import { BugsnagErrorHandler } from '@bugsnag/plugin-angular'
+
+// configure Bugsnag ASAP
+Bugsnag.start({ apiKey: 'ff9398f29a292c922c0fe44e010060f2' })
+BugsnagPerformance.start({ apiKey: 'ff9398f29a292c922c0fe44e010060f2' })
+
+// create a factory which will return the Bugsnag error handler
+export function errorHandlerFactory() {
+  return new BugsnagErrorHandler()
+}
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -36,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -47,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsModule,
     DashboardModule,
     PropertiesModule,
+    CalculationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -62,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: HttpRequestsInterceptor,
       multi: true,
     },
+    { provide: ErrorHandler, useFactory: errorHandlerFactory },
     HttpClient
     //{ provide: LocationStrategy, useClass: HashLocationStrategy },
   ],

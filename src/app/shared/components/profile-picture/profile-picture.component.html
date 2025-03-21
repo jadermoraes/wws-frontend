@@ -23,18 +23,21 @@
         (close)="onModalClose()"
         style="max-height: 200px;"
         >
-        <app-image-cropper
-            [isOpen]="isModalOpen"
-            [image]="selectedImage"
-            (close)="handleCroppedImage($event)"            
-        ></app-image-cropper>
+        <div class="modal-body">
+            <app-image-cropper
+                [isOpen]="isModalOpen"
+                [image]="selectedImage"
+                (close)="handleCroppedImage($event)"            
+            ></app-image-cropper>
 
-        <div class="modal-footer-content">
-            <button style="margin-right: 1rem" color="secondary" (click)="onModalClose()">
-                Reset
+        </div>
+
+        <div class="modal-footer-content w-100">
+            <button style="margin-right: 1rem" wwsBtn="none" color="secondary" (click)="onModalClose()">
+                {{ 'buttons.cancel' | translate }}
             </button>
-            <button color="primary" (click)="triggerCrop()">
-                Ok
+            <button color="primary" wwsBtn="primary" style="float: right;" (click)="triggerCrop()">
+                {{ 'buttons.select' | translate }}
             </button>
         </div>
     </app-modal>

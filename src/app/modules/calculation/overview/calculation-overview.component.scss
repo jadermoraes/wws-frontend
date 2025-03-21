@@ -1,0 +1,98 @@
+.calculation-overview {
+    width: 80%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: var(--primary-color);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .overview-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+  }
+  
+  .image-container {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .house-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calculation-details {
+    flex: 2;
+    padding: 25px;
+    background: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+  .detail-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+  }
+  
+  .edit-price {
+    cursor: pointer;
+    color: #ffcc00;
+    font-weight: bold;
+  }
+  
+  .actions-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .btn-modify, .btn-export, .btn-remove, .btn-additional {
+    padding: 12px 18px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-modify { background: #007bff; color: white; }
+  .btn-export { background: #28a745; color: white; }
+  .btn-remove { background: #dc3545; color: white; }
+  .btn-additional { background: #17a2b8; color: white; }
+  
+  .btn-modify:hover, .btn-export:hover, .btn-remove:hover, .btn-additional:hover {
+    filter: brightness(1.2);
+  }
+  

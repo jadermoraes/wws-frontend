@@ -1,0 +1,30 @@
+<div class="steps-header">
+    <div class="step-title">
+      <h2>{{ currentStep }}</h2>
+    </div>
+  
+    <div class="step-indicator">
+      <div *ngFor="let step of steps; let i = index" class="step-container">
+        <div class="step-circle-wrapper">
+          <div class="step-circle" 
+            [class.active]="i === currentStepIndex"
+            [class.completed]="step.completed"
+            (click)="goToStep(i)">
+            
+            <ng-container *ngIf="step.completed; else stepNumber">
+              ✔
+            </ng-container>
+            <ng-template #stepNumber>
+              {{ i + 1 }}
+            </ng-template>
+          </div>
+          
+          <div class="step-text" *ngIf="step.label">
+            {{ step.label }}
+          </div>
+        </div>
+  
+        <div *ngIf="i < steps.length - 1" [ngStyle]="{'margin-left': (i === currentStepIndex ? '4' : '0') + 'px'}" class="step-line"></div>
+      </div>
+    </div>
+</div>

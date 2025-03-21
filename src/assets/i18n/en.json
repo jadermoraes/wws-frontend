@@ -1,8 +1,8 @@
 {
     "sidebar": {
         "dashboard": "Dashboard",
-        "homes": {
-            "title": "Homes",
+        "properties": {
+            "title": "Properties",
             "list": "List",
             "add": "Add new"
         },
@@ -94,12 +94,13 @@
         "logout": "Logout",
         "signup": "Sign up",
         "invite": "Invite",
-        "update": "Update"
+        "update": "Update",
+        "select": "Select"
     },
     "dashboard": {
         "title": "Dashboard",
-        "homes": "Homes",
-        "listedHomes": "You have {{value}} listed homes",
+        "properties": "Properties",
+        "listedProperties": "You have {{value}} listed properties",
         "viewList": "View list"
     },
     "properties": {
@@ -125,6 +126,12 @@
         "energyLabel": "Energy label",
         "energyLabelPlaceholder": "Select energy label",
         "address": "Address"
+    },
+    "calculations": {
+        "title": "Calculations",
+        "newCalculation": "New calculation",
+        "editCalculation": "Edit calculation",
+        "deleteCalculation": "Delete calculation"
     },
     "language": "language"
 }

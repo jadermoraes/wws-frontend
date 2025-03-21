@@ -46,6 +46,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
 import { ImageCropperComponent } from './components/image-cropper/image-cropper.component';
 import { GoogleMapModalComponent } from './components/google-map-modal/google-map-modal.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { GoogleMapsFrameComponent } from './components/google-maps-frame/google-maps-frame.component';
+import { ChipComponent } from './components/chip/chip.component';
 
 const COMPONENTS_AND_DIRECTIVES = [
   TextDirective,
@@ -85,7 +88,10 @@ const COMPONENTS_AND_DIRECTIVES = [
   ToggleSwitchComponent,
   ProfilePictureComponent,
   ImageCropperComponent,
-  GoogleMapModalComponent
+  GoogleMapModalComponent,
+  ConfirmationComponent,
+  GoogleMapsFrameComponent,
+  ChipComponent
 ];
 
 @NgModule({

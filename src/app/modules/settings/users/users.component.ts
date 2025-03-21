@@ -24,6 +24,8 @@ export class UsersComponent implements OnInit {
     private usersService: UsersService,
     private invitationsService: InvitationsService
   ) {
+    this.inviteText = this.translate.instant('buttons.invite');
+    this.cancelText = this.translate.instant('buttons.cancel');
   }
 
   userTable: TableData = null;
@@ -31,10 +33,14 @@ export class UsersComponent implements OnInit {
   selectedRole = '';
   showInviteModal: boolean = false;
   roles = defaultRoles;
+  processing: boolean = false;
+  inviteText = '';
+  cancelText = '';
 
   @ViewChild('actionTemplateUserActive', { static: false }) actionTemplateUserActive!: TemplateRef<any>;
   @ViewChild('actionTemplateUserInactive', { static: false }) actionTemplateUserInactive!: TemplateRef<any>;
   @ViewChild('actionTemplateInvite', { static: false }) actionTemplateInvite!: TemplateRef<any>;
+
 
   ngOnInit(): void {
     this.usersService.getUsers().subscribe((data) => {
@@ -53,7 +59,6 @@ export class UsersComponent implements OnInit {
 
   onInviteUser() {
     this.showInviteModal = true;
-    // this.router.navigate(['invite'], { relativeTo: this.route });
   }
 
   onModalClose(): void {
@@ -64,6 +69,7 @@ export class UsersComponent implements OnInit {
 
   async onSendInvite() {
     if (this.inviteEmail && this.selectedRole) {
+      this.processing = true;
       let data = {
         email: this.inviteEmail,
         role: this.selectedRole,
@@ -85,5 +91,6 @@ export class UsersComponent implements OnInit {
       this.toastService.danger(result.message);
       this.onModalClose();
     }
+    this.processing = false;
   }
 }

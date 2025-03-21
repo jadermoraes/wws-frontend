@@ -22,9 +22,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   username: string = '';
   private userDataSubscription!: Subscription;
-  listedHouses = '';
-  homes = ''
-  listedHousesCount = 0;
+  listedProperties = '';
+  properties = ''
+  listedPropertiesCount = 0;
 
   ngOnInit() {
     this.userDataSubscription = this.sessionService
@@ -38,9 +38,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }});  
 
       this.propertyService.getProperties().subscribe((data) => {
-        data.rows.length > 0 ? this.listedHousesCount = data.rows.length : this.listedHousesCount = 0;
-        this.listedHouses = this.translate.instant('dashboard.listedHomes', {value: this.listedHousesCount});
-        this.homes = this.translate.instant('dashboard.homes');
+        data.rows.length > 0 ? this.listedPropertiesCount = data.rows.length : this.listedPropertiesCount = 0;
+        this.listedProperties = this.translate.instant('dashboard.listedProperties', {value: this.listedPropertiesCount});
+        this.properties = this.translate.instant('dashboard.properties');
       });
   }
 

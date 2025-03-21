@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-picture',
@@ -14,6 +15,8 @@ export class ProfilePictureComponent {
   
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
+  selectText: string = 'Select';
+  cancelText: string = 'Cancel';
 
   file: string = '';
 
@@ -64,6 +67,7 @@ export class ProfilePictureComponent {
   }
 
   onModalClose() {
+    console.log('onModalClose');
     this.isModalOpen = false;
     this.onGetPicture.emit(null);
   }

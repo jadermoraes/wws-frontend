@@ -1,8 +1,8 @@
 {
     "sidebar": {
         "dashboard": "Dashboard",
-        "homes": {
-            "title": "Huizen",
+        "properties": {
+            "title": "Eigenschappen",
             "list": "Lijst",
             "add": "Nieuwe toevoegen"
         },
@@ -94,12 +94,13 @@
         "logout": "Uitloggen",
         "signup": "Aanmelden",
         "invite": "Uitnodigen",
-        "update": "Bijwerken"
+        "update": "Bijwerken",
+        "select": "Selecteer"
     },
     "dashboard": {
         "title": "Dashboard",
-        "homes": "Huizen",
-        "listedHomes": "Je hebt {{value}} genoteerde huizen",
+        "properties": "Eigenschappen",
+        "listedProperties": "Je hebt {{value}} genoteerde eigenschappen",
         "viewList": "Bekijk lijst"
     }, 
     "properties": {
@@ -125,6 +126,12 @@
         "energyLabel": "Energielabel",
         "energyLabelPlaceholder": "Selecteer energielabel",
         "address": "Adres"
+    },
+    "calculations": {
+        "title": "Berekeningen",
+        "newCalculation": "Nieuwe berekening",
+        "editCalculation": "Bewerk berekening",
+        "deleteCalculation": "Verwijder berekening"
     },
     "language": "taal"
 }

@@ -1,0 +1,20 @@
+<div class="confirmation-modal" *ngIf="showModal">
+  <div class="modal-content">
+    <h3 class="modal-title">{{ config.title || 'Confirm Action' }}</h3>
+    
+    <p class="main-text">{{ config.message }}</p>
+
+    <div *ngIf="config.confirmText">
+      <p>Type "<strong>{{ config.confirmText }}</strong>" to confirm:</p>
+      <input type="text" [(ngModel)]="userInput" class="input-confirm" />
+    </div>
+
+    <div class="modal-footer">
+      <button wwsBtn="default" class="btn" (click)="closeModal()">Cancel</button>
+      <button [wwsBtn]="config.theme === 'danger' ? 'danger' : 'primary'" class="btn" (click)="confirm()" 
+              [disabled]="config.confirmText && userInput !== config.confirmText">
+        Confirm
+      </button>
+    </div>
+  </div>
+</div>

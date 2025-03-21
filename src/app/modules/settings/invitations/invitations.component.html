@@ -23,35 +23,5 @@
   <ng-template #actionTemplateAccepted let-row>
     <h2 class="title">Accepted</h2>
   </ng-template>
-
-  <!-- <app-modal [show]="showInviteModal" class="invite-modal">
-    <div class="modal-header">
-      <h3>Invite a User</h3>
-    </div>
-  
-    <div class="modal-body">
-      <label for="email" class="modal-label">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        [(ngModel)]="inviteEmail"
-        required
-        class="form-control"
-        placeholder="Enter user email"
-      />
-  
-      <label for="role" class="modal-label">Role</label>
-      <select id="role" required [(ngModel)]="selectedRole" class="fadeIn fifth form-control" name="role" >
-        <option value="admin">{{'user.role.admin' | translate}}</option>
-        <option value="user">{{'user.role.user' | translate}}</option>
-      </select>
-    </div>
-  
-    <div class="modal-footer">
-      <button class="btn-secondary" (click)="onModalClose()">Cancel</button>
-      <button class="btn-primary" [disabled]="!inviteEmail || !selectedRole" (click)="onSendInvite()">Send Invite</button>
-    </div>
-  </app-modal> -->
      
 </div>

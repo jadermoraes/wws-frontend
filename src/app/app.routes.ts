@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Início' } },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Dashboard' } },
       {
         path: 'properties',
         loadChildren: () =>
@@ -31,6 +31,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/settings/settings.module').then(
             (m) => m.SettingsModule
+          ),
+      },
+      {
+        path: 'calculations',
+        loadChildren: () =>
+          import('./modules/calculation/calculation.module').then(
+            (m) => m.CalculationModule
           ),
       },
       { path: 'showcase', component: ShowcaseComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Showcase' } },

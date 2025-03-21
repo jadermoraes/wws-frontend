@@ -1,0 +1,17 @@
+<div class="calculation-new-container">
+    <h2>Start a New Calculation</h2>
+    <p>Select a quarter period and confirm to proceed.</p>
+  
+    <label for="quarter-period">Quarter Period:</label>
+    <select id="quarter-period" [(ngModel)]="selectedPeriod" class="dropdown-quarter">
+      <option value="" disabled selected>Choose a period...</option>
+      <option *ngFor="let period of quarterPeriods" [value]="period.periodId">{{ period.periodName }}</option>
+    </select>
+  
+    <div class="cost-info">
+      <p>This calculation will cost <strong>1 credit</strong>.</p>
+    </div>
+  
+    <button [disabled]="!selectedPeriod" (click)="confirmCalculation()">Confirm Calculation</button>
+  </div>
+  

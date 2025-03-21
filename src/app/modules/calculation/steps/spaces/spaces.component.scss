@@ -1,0 +1,223 @@
+.spaces-container {
+    padding: 16px;
+    max-width: 80%;
+    margin: auto;
+  }
+  
+  .add-space-div {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+  }
+
+  .add-space-btn {
+    width: 10%;
+    height: 40px;
+    font-size: medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .space-group {
+    margin-bottom: 20px;
+  }
+  
+  .space-group-card {
+    background: var(--primary-color);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid var(--theme);
+  }
+  
+  .group-title {
+    background: var(--theme);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .collapse-indicator {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .space-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .select-bg {
+    background-color: none !important;
+  }
+  
+  .space-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 10px;
+    background: var(--tertiary-color);
+    border-radius: 5px;
+  }
+  
+  .space-row.header {
+    font-weight: bold;
+    background: var(--theme);
+
+    div {
+        color: var(--theme-text-white);
+    }
+  }
+  
+  .toggle-btn, .delete-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light-action-color);
+  }
+  
+  .toggle-btn.heating.active {
+    color: mix(red, white, 50%);
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+  }
+  
+  .toggle-btn.cooling.active {
+    color: mix(blue, white, 50%);
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+  }
+  
+  .delete-btn {
+    color: var(--light-action-color);
+    transform: scale(1);
+  }
+  
+  .delete-btn:hover {
+    background-color: mix(#e74c3c, black, 90%);
+    transform: scale(1.1);
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+  }
+
+  .spaces-modal {
+    .space-group-selection {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+  
+    .group-option {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 20px;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      width: 120px;
+      height: 120px;
+      text-align: center;
+  
+      i {
+        font-size: 36px;
+      }
+  
+      span {
+        font-size: 14px;
+      }
+  
+      &:hover {
+        background: var(--theme);
+        transform: scale(1.1);
+      }
+    }
+  
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      transition: all 0.3s ease-in-out;
+    }
+  
+    .dimension-group {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+  
+      div {
+        flex: 1;
+      }
+    }
+  
+    .toggle-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 22px;
+    }
+  
+    .toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color, #ccc);
+      padding: 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      flex: 1;
+      color: white;
+  
+      &.heating {
+        &.active {
+            background-color: var(--primary-color);
+            color: red;
+            transform: scale(1.05);
+          }
+      }
+  
+      &.cooling {
+        &.active {
+            background-color: var(--primary-color);
+            color: blue;
+            transform: scale(1.05);
+          } 
+      }
+    }
+  }
+  
+  

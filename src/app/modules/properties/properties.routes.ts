@@ -5,6 +5,7 @@ import { PropertyComponent } from './property/property.component';
 import { PropertiesComponent } from './properties/properties.component';
 
 export const propertiesRoutes: Routes = [
+  { path: '', redirectTo: 'list', pathMatch: 'full' }, 
   {
     path: 'list',
     component: PropertiesComponent,

@@ -32,10 +32,6 @@ export class PropertiesComponent implements OnInit {
         'propertyActions': this.actionProperties,
       }
 
-      data.headers.find(h => h.key === 'pointsTemplate').customTemplates = {
-        'pointsTemplate': this.pointsTemplate,
-      }
-
       data.headers.find(h => h.key === 'imgTemplate').customTemplates = {
         'imgTemplate': this.imgTemplate,
       }
@@ -47,7 +43,9 @@ export class PropertiesComponent implements OnInit {
   navigateToProperty(path: string) {
     this.router.navigate(['/properties/property/' + path]);
   }
-  onAddPoints(property: Property) {
-    alert('Add points for property: ' + property.propertyNumber);
+  
+  newCalculation(id: string) {
+    this.router.navigate([`/calculations/${id}/new`]);
+
   }
 }

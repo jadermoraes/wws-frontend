@@ -58,6 +58,7 @@ body {
   --theme-text-white: #{$c-theme--text-white};
   --theme-text-black: #{$c-theme--text-black};
   --theme-second-text-color: #{$c-secondary-text-color-light};
+  --light-action-color: #{$c-light-action-color-light};
 }
 
 /* Tema escuro */
@@ -87,6 +88,7 @@ body {
   --theme-text-white: #{$c-theme--text-white};
   --theme-text-black: #{$c-theme--text-black};
   --theme-second-text-color: #{$c-secondary-text-color-dark};
+  --light-action-color: #{$c-light-action-color-dark};
 }
 
 .text-danger {
@@ -402,4 +404,8 @@ button {
 
 .right-text {
   text-align: right;
+}
+
+.f-d-r {
+  flex-direction: row !important;
 }

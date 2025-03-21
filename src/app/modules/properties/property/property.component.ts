@@ -7,6 +7,9 @@ import { PropertyService } from '../property.service';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { GoogleMapsService } from 'src/app/shared/services/google-maps.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { TableData } from 'src/app/shared/interfaces/tableData';
+import { CalculationService } from '../../calculation/calculation.service';
+import { ConfirmationService } from 'src/app/shared/services/confirmation.service';
 
 @Component({
   selector: 'wws-property',
@@ -23,15 +26,19 @@ export class PropertyComponent implements OnInit {
   mapsModal: boolean = false;
   addressForModal: string = '';
   propertyPicture: string = '';
+  refName: string = '';
+  calculations: TableData = null;
+  allowNewCalculation: boolean = false;
 
   constructor(private route: ActivatedRoute, 
     private toastService: ToastService,
     private translate: TranslateService, 
     private fb: FormBuilder,
     private propertyService: PropertyService,
-    private googleMapsService: GoogleMapsService,
+    private calculationService: CalculationService,
     private router: Router,
-    private imageCompress: NgxImageCompressService
+    private imageCompress: NgxImageCompressService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit() {
@@ -61,6 +68,14 @@ export class PropertyComponent implements OnInit {
       if (propertyData.picture) {
         this.propertyPicture = propertyData.picture;
       }
+      this.addressForModal = this.getfullAddress();
+      this.refName = propertyData.reference;
+
+        this.calculationService.getCalculations(this.propertyId).subscribe((data) => {
+          this.calculations = data;
+          this.allowNewCalculation = (data.rows.length === 0 || 
+            (data.rows.find((row: any) => row.status === 'in-progress') === undefined));
+        });
     });    
   }
 
@@ -74,6 +89,8 @@ export class PropertyComponent implements OnInit {
 
   onSave(): void {
     if (this.propertyForm.valid) {
+      this.addressForModal = this.getfullAddress();
+      console.log(this.addressForModal);
       this.openGoogleMapModal();
     } else {
       this.propertyForm.markAllAsTouched();
@@ -81,8 +98,6 @@ export class PropertyComponent implements OnInit {
   }
 
   openGoogleMapModal() {
-    const fullAddress = `${this.propertyForm.value.streetName}, ${this.propertyForm.value.propertyNumber} -  ${this.propertyForm.value.place}`;
-    this.addressForModal = fullAddress;
     this.mapsModal = true;
   }
 
@@ -136,6 +151,62 @@ export class PropertyComponent implements OnInit {
 
   hasError(field: string, error: string): boolean {
     return this.propertyForm.get(field)?.hasError(error) && this.propertyForm.get(field)?.touched;
+  }
+
+  getfullAddress(): string {
+    return `${this.propertyForm.value.streetName}, ${this.propertyForm.value.propertyNumber} -  ${this.propertyForm.value.place}`;
+  }
+
+  async newCalculation() {
+      const confirmed = await this.confirmationService.confirm({
+        title: 'New Calculation',
+        message: `Do you want to create a new calculation for this property?`,
+      });
+    
+      if (confirmed) {
+        this.router.navigate([`/calculations/${this.propertyId}/new`]);
+      }
+  }
+
+  async resumeCalculation(calcId: string) {
+    const confirmed = await this.confirmationService.confirm({
+      title: 'Calculation',
+      message: `Do you want to resume this calculation process?`,
+    });
+  
+    if (confirmed) {
+      this.router.navigate([`/calculations/${calcId}/steps`]);
+    }
+  }
+
+  async viewCalculation(calcId: string) {
+    this.router.navigate([`/calculations/${calcId}/overview`]);
+  }
+
+  getAddress = () => {
+    if (!this.propertyForm.value.zipCode || !this.propertyForm.value.propertyNumber) {
+      return;
+    }
+
+    this.propertyForm.disable();
+
+    this.propertyService.getAddress(this.propertyForm.value.zipCode, this.propertyForm.value.propertyNumber).subscribe({next: (data) => {
+      if (data && data.status === 'ok') {
+        let bag = data.bag[0];
+
+        if (bag) {
+          this.propertyForm.patchValue({
+            streetName: bag.street,
+            propertyLetter: bag.letter,
+            place: bag.city
+          });
+        }    
+      }
+    }, error: (error) => {
+      this.toastService.danger('Error fetching address information');
+    }, complete: () => {
+      this.propertyForm.enable();
+    }});
   }
   
 }

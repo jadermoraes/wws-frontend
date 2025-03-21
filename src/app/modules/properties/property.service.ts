@@ -11,6 +11,9 @@ export class PropertyService {
 
     private apiUrl = '/modules/properties';
 
+    private apiPostcodeUrl = 'https://free.bedrijfsdata.nl/v1.1/bag?';
+
+
     constructor(private http: HttpClient) { }
 
     getProperties(): Observable<TableData> {
@@ -23,5 +26,9 @@ export class PropertyService {
 
     createProperty(property: Property): Observable<Property> {
         return this.http.post<Property>(this.apiUrl, property);
+    }
+
+    getAddress(postalCode: string, number: number): Observable<any> {
+        return this.http.get<any>(`${this.apiPostcodeUrl}postcode=${postalCode}&number=${number}`);
     }
 }

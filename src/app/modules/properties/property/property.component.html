@@ -3,16 +3,19 @@
         <div class="form-header">
             <div class="header-content">
                 <ng-container *ngIf="isNew; else editHeader">
-                    <wws-label class="header-title">Add New Property</wws-label>
+                    <wws-label fontSize="16" class="header-title">Add New Property</wws-label>
                 </ng-container>
                 <ng-template #editHeader>
-                    <wws-label class="header-title">
-                        View Property <span class="header-highlight">#{{ propertyId }}</span>
+                    <wws-label fontSize="16" class="header-title">
+                        View Property <span class="header-highlight">#{{ refName }}</span>
                     </wws-label>
                 </ng-template>
                 
                 <ng-container *ngIf="!isNew && propertyPicture">
-                    <img [src]="propertyPicture" alt="Property Image" class="property-image">
+                    <div class="grid-row">
+                        <img [src]="propertyPicture" alt="Property Image" class="property-image">
+                        <app-google-maps-frame class="property-image" [address]="addressForModal"></app-google-maps-frame>
+                    </div>
                 </ng-container>
             </div>
         </div>
@@ -22,7 +25,7 @@
             <div class="grid-col-3">
                 <p wwsFormElement>
                     <wws-label>{{ 'properties.postalCode' | translate }}</wws-label>
-                    <input type="text" wwsText formControlName="zipCode" [maxlength]="20">
+                    <input type="text" wwsText formControlName="zipCode" [maxlength]="20" (blur)="getAddress()">
                     <span class="error" *ngIf="hasError('zipCode', 'required')">{{ 'errors.required' | translate }}</span>
                     <span class="error" *ngIf="hasError('zipCode', 'minlength')">{{ 'errors.min_length' | translate }}</span>
                 </p>
@@ -31,7 +34,7 @@
             <div class="grid-col-3">
                 <p wwsFormElement>
                     <wws-label>{{ 'properties.propertyNumber' | translate }}</wws-label>
-                    <input type="text" wwsNumber formControlName="propertyNumber" class="right-text p-r-sm">
+                    <input type="text" wwsNumber formControlName="propertyNumber" class="right-text p-r-sm" (blur)="getAddress()">
                     <span class="error" *ngIf="hasError('propertyNumber', 'required')">{{ 'errors.required' | translate }}</span>
                     <span class="error" *ngIf="hasError('propertyNumber', 'pattern')">{{ 'errors.invalidNumber' | translate }}</span>
                 </p>
@@ -100,3 +103,66 @@
     <app-google-map-modal *ngIf="mapsModal && addressForModal" [address]="addressForModal" (onImageSelected)="saveProperty($event)" (onClose)="closeModal()"></app-google-map-modal>
 
 </form>
+
+<div id="calculation" *ngIf="!isNew" class="wws-layout grid-container">
+    <div class="w-100">
+        <div class="form-header">
+            <div class="header-content">
+                <wws-label fontSize="16" class="header-title">{{"calculations.title" | translate}}</wws-label>
+            </div>
+        </div>
+        <div *ngIf="(!calculations || !calculations.rows || calculations.rows.length == 0);else calculationsTemplate" class="grid-row">
+            <div class="main-action">
+                <button wwsBtn="success" type="button" class="btn-main-action" (click)="newCalculation()">{{"calculations.newCalculation" | translate}}</button>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #calculationsTemplate>
+        <div *ngIf="calculations && calculations.rows.length > 0" class="calculations-container">
+
+          <div *ngIf="allowNewCalculation" class="calculation-actions">
+            <button wwsBtn="success" type="button" class="m-r-md" (click)="newCalculation()">New Calculation</button>
+          </div>  
+      
+          <!-- Table Header -->
+          <div class="calculation-header">
+            <span class="header-item period">Period</span>
+            <span class="header-item points">Points</span>
+            <span class="header-item rent">Max Rent</span>
+            <span class="header-item created">Created By</span>
+            <span class="header-item start">Start Time</span>
+            <span class="header-item status">Status</span>
+            <span class="header-item actions">Actions</span>
+          </div>
+      
+          <!-- Calculation Rows -->
+          <div *ngFor="let row of calculations.rows" class="calculation-card">
+            <div class="calculation-content">
+              <span class="calculation-item period">{{ row.periodName || '—' }}</span>
+              <span class="calculation-item points">{{ row.totalPoints ?? '—' }}</span>
+              <span class="calculation-item rent">{{ row.maxRent ?? '—' }}</span>              
+              <span class="calculation-item created">{{ row.createdBy || '—' }}</span>
+              <span class="calculation-item start">{{ row.startTime || '—' }}</span>
+              <div class="status">
+                <app-chip [text]="row.status || '—'" [status]="(row.status == 'completed') ? 'success' : 'pending'"></app-chip>
+            </div>
+            <div class="actions card-actions">
+                <div *ngIf="row.status === 'completed'">
+                    <button wwsBtn="success" type="button" class="m-r-md" (click)="viewCalculation(row.id)"><i class="fa fa-eye m-r-sm"></i>View</button>
+                </div>
+                <div *ngIf="row.status === 'in-progress'">
+                  <button wwsBtn="primary" type="button" class="m-r-md" (click)="resumeCalculation(row.id)" ><i class="fa fa-play m-r-sm"></i>Continue</button>
+                </div>
+              </div>  
+            </div>            
+          </div>
+        </div>
+      
+        <p *ngIf="!calculations || calculations.rows.length === 0" class="no-data">
+          No calculations available!
+        </p>
+    </ng-template>
+           
+</div>
+

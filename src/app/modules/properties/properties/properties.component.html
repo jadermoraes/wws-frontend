@@ -23,12 +23,5 @@
     <ng-template #imgTemplate let-row>
         <img [src]="row.picture" alt="Property Image" class="img-thumbnail">
     </ng-template>
-
-    <ng-template #pointsTemplate let-row>
-        <span *ngIf="row.points; else noPointsTemplate">{{ row.points }}</span>
-        <ng-template #noPointsTemplate>
-            <button wwsBtn="primary" type="button" (click)="navigateToProperty(row.id)">New Calculation</button>
-        </ng-template>
-    </ng-template>
        
   </div>

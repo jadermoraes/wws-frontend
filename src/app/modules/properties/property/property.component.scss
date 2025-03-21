@@ -76,10 +76,125 @@
 }
 
 .property-image {
-    width: 250px;  // Adjust as needed
+    width: 50%;  // Adjust as needed
     height: 200px;
     border-radius: 5px;
     object-fit: cover;
     border: 1px solid #ccc;
     margin-top: 10px;
+}
+
+.main-action {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+#calculation {
+
+    .form-header {
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .calculation-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+    .calculations-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+        width: 100%;
+      }
+      
+      /* Table Header */
+      .calculation-header {
+        display: flex;
+        align-items: center;
+        background: var(--secondary-color);
+        color: white;
+        font-weight: bold;
+        padding: 12px 16px;
+        border-radius: 8px;
+        width: 100%;
+      }
+      
+      /* Define % Column Widths */
+      .header-item,
+      .calculation-item {
+        flex: 1;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .period { flex-basis: 15%; }
+      .points { flex-basis: 10%; }
+      .rent { flex-basis: 10%; }
+      .status { flex-basis: 20%;}
+      .created { flex-basis: 15%; }
+      .start { flex-basis: 15%; }
+      .actions { flex-basis: 15%; text-align: center; align-items: center; }
+      
+      /* Calculation Rows */
+      .calculation-card {
+        background: var(--theme);
+        border-radius: 8px;
+        padding: 12px 16px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+      
+      .calculation-content {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+      }
+      
+      /* Actions */
+      .card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-basis: 15%;
+      }
+      
+      .action-btn {
+        background: var(--theme);
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      
+        i {
+          font-size: 16px;
+        }
+      
+        &:hover {
+          background: color-mix(in srgb, var(--theme) 90%, black);
+        }
+      }
+      
+      .no-data {
+        text-align: center;
+        color: var(--primary-text-color);
+        margin-top: 20px;
+    }
+      
+          
 }

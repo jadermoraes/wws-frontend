@@ -26,7 +26,7 @@ import {
       next: HttpHandler
     ): Observable<HttpEvent<any>> {
       let newReq;
-      if (req.url.includes('assets/i18n/') || req.url.includes('maps.googleapis')) {
+      if (req.url.includes('assets/i18n/') || req.url.includes('maps.googleapis') ||  req.url.includes('bedrijfsdata')) {
         return next.handle(req);
       }
       let token = this.sessionService.getToken();
@@ -56,6 +56,7 @@ import {
     }
 
     private processError(req: HttpRequest<any>, error: HttpErrorResponse) {
+      debugger;
       if (error.status === 504) {
         localStorage.setItem('timeout-url', window.location.href);
         window.location.href = window.location.origin + '/#/' + '504';
@@ -80,6 +81,10 @@ import {
       if (error.status === 0) {
         /* Canceled request / internet is down */
         return new Observable<HttpEvent<any>>();
+      }
+
+      if (isDevMode()) {
+        console.error('Request error', error);
       }
 
       return throwError(error);

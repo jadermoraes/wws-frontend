@@ -1,0 +1,40 @@
+.chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    min-width: max-content;
+  }
+  
+  /* Status Variants */
+  .chip.default {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  .chip.success {
+    background: #2ecc71;
+    color: white;
+  }
+  
+  .chip.warning {
+    background: #f1c40f;
+    color: black;
+  }
+  
+  .chip.error {
+    background: #e74c3c;
+    color: white;
+  }
+
+  .chip.pending {
+    background: #42589b;
+    color: white;
+  }
+  

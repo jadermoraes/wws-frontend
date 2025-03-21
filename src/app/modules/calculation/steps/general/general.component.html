@@ -1,0 +1,11 @@
+<div class="general-container">
+  <button wwsBtn="primary" (click)="loadWozValues()">Get WOZ Values</button>
+
+  <div *ngIf="wozAmounts">
+    <label for="quarter-period">Quarter Period:</label>
+    <select id="quarter-period" [(ngModel)]="selectedWozValue" class="dropdown-quarter">
+      <option value="" disabled selected>Choose a period...</option>
+      <option *ngFor="let woz of wozAmounts" [value]="woz.period">$ {{ woz.wozAmount }} - Period: {{ woz.period }}</option>
+    </select>
+  </div>
+</div>

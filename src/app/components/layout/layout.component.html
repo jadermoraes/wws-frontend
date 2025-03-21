@@ -1,9 +1,9 @@
 <div class="main-layout">
   <app-topbar *ngIf="isLoggedIn()"></app-topbar>
   <div class="main-container" [class.minimized]="minimized">
-    <app-sidenav *ngIf="isLoggedIn()" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+    <app-sidenav *ngIf="isLoggedIn() && !this.hideSideNav" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
     <div class="content-area">
-      <div class="main-content">
+      <div class="main-content" [ngClass]="{'no-padding': hideSideNav}">
         <router-outlet></router-outlet>
       </div>
     </div>
