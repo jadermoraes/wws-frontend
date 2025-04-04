@@ -28,12 +28,18 @@ export class PropertiesComponent implements OnInit {
 
   ngOnInit() {
     this.propertyService.getProperties().subscribe((data) => {
-      data.headers.find(h => h.key === 'actions').customTemplates = {
-        'propertyActions': this.actionProperties,
+      let actionsHdr = data.headers.find(h => h.key === 'actions');
+      if (actionsHdr) {
+        actionsHdr.customTemplates = {
+          'propertyActions': this.actionProperties,
+        }
       }
 
-      data.headers.find(h => h.key === 'imgTemplate').customTemplates = {
-        'imgTemplate': this.imgTemplate,
+      let imgTemplateHdr = data.headers.find(h => h.key === 'imgTemplate');
+      if (imgTemplateHdr) {
+        imgTemplateHdr.customTemplates = {
+          'imgTemplate': this.imgTemplate,
+        }
       }
 
       this.propertyList = data;
