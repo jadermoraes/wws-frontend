@@ -1,0 +1,136 @@
+.toilet-section {
+  margin-bottom: 24px;
+  padding: 10px 15%;
+}
+
+.toilet-card {
+  background: var(--primary-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid var(--theme);
+}
+
+.toilet-header h4 {
+  margin: 0 0 16px;
+  color: var(--primary-text-color);
+  font-weight: bold;
+  font-size: large;
+}
+
+.toilet-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--primary-text-color);
+  }
+
+  input, select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    max-width: 250px;
+  }
+}
+
+.facilities-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-weight: bold;
+    color: var(--primary-text-color);
+  }
+
+  .facility-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .facility-chip {
+    background: var(--tertiary-color);
+    padding: 10px 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: red;
+    }
+  }
+
+  .add-facility-btn {
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: var(--theme);
+    }
+  }
+}
+
+.toggle-group-options {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.toggle-option {
+  background: var(--tertiary-color);
+      color: var(--primary-text-color);
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+  
+      input[type='radio'] {
+        display: none;
+      }
+  
+      &.active {
+        background: var(--primary-active);
+        color: white;
+        border-color: var(--theme);
+        font-weight: 600;
+      }
+  
+      &:hover {
+        background: color-mix(in srgb, var(--primary-active), 90%, black);
+      }
+}

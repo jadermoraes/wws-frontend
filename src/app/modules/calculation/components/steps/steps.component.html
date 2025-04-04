@@ -1,3 +1,15 @@
-<app-steps-header [steps]="steps" [currentStepIndex]="currentStepIndex"></app-steps-header>
-<router-outlet></router-outlet>
-<app-steps-footer [actions]="footerActions"></app-steps-footer>
+<div class="page-wrapper">
+    <app-steps-header [steps]="steps" [currentStepIndex]="currentStepIndex"></app-steps-header>
+  
+    <div class="step-main">
+      <div class="step-content-wrapper" [class.loading]="isSavingStep">
+        <div class="step-loading-overlay" *ngIf="isSavingStep">
+          <div class="spinner"></div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  
+    <app-steps-footer [actions]="footerActions"></app-steps-footer>
+  </div>
+  

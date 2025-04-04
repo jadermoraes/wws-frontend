@@ -49,6 +49,8 @@ import { GoogleMapModalComponent } from './components/google-map-modal/google-ma
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { GoogleMapsFrameComponent } from './components/google-maps-frame/google-maps-frame.component';
 import { ChipComponent } from './components/chip/chip.component';
+import { SelectComponent } from './components/select/select.component';
+import { FacilitySelectorComponent } from './components/facility-selector/facility-selector.component';
 
 const COMPONENTS_AND_DIRECTIVES = [
   TextDirective,
@@ -91,7 +93,9 @@ const COMPONENTS_AND_DIRECTIVES = [
   GoogleMapModalComponent,
   ConfirmationComponent,
   GoogleMapsFrameComponent,
-  ChipComponent
+  ChipComponent,
+  SelectComponent,
+  FacilitySelectorComponent,
 ];
 
 @NgModule({

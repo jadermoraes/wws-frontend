@@ -13,14 +13,22 @@ import { CalculationNewComponent } from "./calculation-new/calculation-new.compo
 import { StepsFooterComponent } from "./components/steps-footer/steps-footer.component";
 import { CalculationOverviewComponent } from "./overview/calculation-overview.component";
 import { GeneralComponent } from "./steps/general/general.component";
+import { KitchensComponent } from "./steps/kitchens/kitchens.component";
+import { ToiletsComponent } from "./steps/toilets/toilets.component";
+import { AdditionalComponent } from "./steps/additional/additional.component";
+import { SummaryComponent } from "./steps/summary/summary.component";
 
 const COMPONENTS_AND_DIRECTIVES = [
     CalculationComponent,
     CalculationNewComponent,
     StepsFooterComponent,
     StepsHeaderComponent,
-    SpacesComponent,
     GeneralComponent,
+    SpacesComponent,
+    KitchensComponent,
+    ToiletsComponent,
+    AdditionalComponent,
+    SummaryComponent,
     StepsComponent,
     CalculationOverviewComponent
 ];

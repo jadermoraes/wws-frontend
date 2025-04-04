@@ -13,7 +13,7 @@ import { NgModel } from '@angular/forms';
 @Directive({ selector: '[wwsSelect]' })
 export class SelectDirective implements OnChanges {
   @Input()
-  wwsSelectOptions: SelectOption[];
+  wwsSelectOptions: any[];
 
   @Input()
   wwsSelectOptionLabel: string = 'label';

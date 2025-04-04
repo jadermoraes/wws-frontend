@@ -7,10 +7,9 @@
     color: white;
     border-top: 3px solid var(--primary-border);
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-bottom: 30px;
+    position: relative;
+    bottom: auto;
+    margin-bottom: 80px;
   }
   
   .footer-section {

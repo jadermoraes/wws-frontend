@@ -1,0 +1,27 @@
+<app-modal
+  class="facility-selector-modal"
+  [show]="show"
+  [title]="'Add Kitchen Facility'"
+  [actions]="[
+    { title: 'Cancel', type: 'secondary', position: 'left', action: onClose },
+    { title: 'Add', type: 'primary', position: 'right', action: onConfirm, disabled: !selectedFacilityId }
+  ]"
+  (onClose)="onClose()"
+>
+  <div class="modal-body">
+    <div class="selector-wrapper">
+      <label for="facility" class="facility-label">Select a facility:</label>
+      <select
+        id="facility"
+        [(ngModel)]="selectedFacilityId"
+        class="form-control facility-dropdown"
+      >
+        <option [value]="null" disabled>Select a facility...</option>
+        <option *ngFor="let f of facilities" [value]="f.id">{{ f.label }}</option>
+      </select>
+
+      <label class="facility-label" for="quantity">Quantity:</label>
+      <input type="number" min="1" [(ngModel)]="selectedQuantity" />
+    </div>
+  </div>
+</app-modal>

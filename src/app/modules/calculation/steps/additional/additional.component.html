@@ -1,0 +1,25 @@
+<div class="additional-container">
+  <div class="card-section additional-section">
+    <h3 class="section-title">Additional Data</h3>
+  
+    <div class="info-group" *ngFor="let field of fields">
+      <div class="info-header">
+        <label [for]="field.key">{{ field.label }}</label>
+        <i class="fa fa-info-circle" (click)="toggleInfo(field.key)"></i>
+      </div>
+  
+      <div *ngIf="infoVisible[field.key]" class="info-text">
+        {{ field.description }}
+      </div>
+  
+      <select
+        class="styled-select"
+        [id]="field.key"
+        [(ngModel)]="additional[field.key]"
+      >
+        <option [ngValue]="false">No</option>
+        <option [ngValue]="true">Yes</option>
+      </select>
+    </div>
+  </div>  
+</div>

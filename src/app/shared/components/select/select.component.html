@@ -1,0 +1,9 @@
+<div class="custom-select-wrapper">
+    <label *ngIf="label">{{ label }}</label>
+    <select [(ngModel)]="model" [disabled]="disabled">
+      <option *ngFor="let option of options" [value]="option[valueKey]">
+        {{ option[labelKey] }}
+      </option>
+    </select>
+  </div>
+  

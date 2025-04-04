@@ -12,6 +12,7 @@ export class CalculationService {
 
     private apiUrl = '/modules/calculations';
     private apiPeriodsUrl = '/modules/periods';
+    private apiStepsUrl = '/modules/steps';
 
     constructor(private http: HttpClient) { }
 
@@ -27,7 +28,43 @@ export class CalculationService {
         return this.http.post<any>(`${this.apiUrl}/${propertyId}/new`, { 'period_id': periodId });
     }
 
-    getWozValues(calculation: string): Observable<WozValues[]> {
+    getWozValues(calculation: string): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}/${calculation}/woz`);
+    }
+
+    validateBagId(calculation: string, addressId: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/${calculation}/bag`, {addressId});
+    }
+    
+    getElData(calculation: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/${calculation}/el`);
+    }
+
+    getSteps(calculation: string): Observable<any> {
+        return this.http.get<any>(`${this.apiStepsUrl}/${calculation}`);
+    }
+
+    getStepData(calculation: string, stepId: string): Observable<any> {
+        return this.http.get<any>(`${this.apiStepsUrl}/${calculation}/step/${stepId}`);
+    }
+
+    saveStepStep(calculation: string, stepId: string, data: any): Observable<any> {
+        return this.http.post<any>(`${this.apiStepsUrl}/${calculation}/step/${stepId}`, data);
+    }
+
+    getSpaceGroups(): Observable<any> {
+        return this.http.get<any>(`${this.apiStepsUrl}/spaces/types`);
+    }
+
+    getKitchenFacilities(): Observable<any> {
+        return this.http.get<any>(`${this.apiStepsUrl}/kitchens/facilities`);
+    }
+
+    getToiletFacilities(): Observable<any> {
+        return this.http.get<any>(`${this.apiStepsUrl}/toilets/facilities`);
+    }
+
+    startCalculation(calculation: string): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/${calculation}/start`, {});
     }
 }

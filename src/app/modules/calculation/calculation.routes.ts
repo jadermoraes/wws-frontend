@@ -6,6 +6,10 @@ import { StepsComponent } from "./components/steps/steps.component";
 import { CalculationNewComponent } from "./calculation-new/calculation-new.component";
 import { CalculationOverviewComponent } from "./overview/calculation-overview.component";
 import { GeneralComponent } from "./steps/general/general.component";
+import { KitchensComponent } from "./steps/kitchens/kitchens.component";
+import { ToiletsComponent } from "./steps/toilets/toilets.component";
+import { AdditionalComponent } from "./steps/additional/additional.component";
+import { SummaryComponent } from "./steps/summary/summary.component";
 
 export const calculationRoutes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -15,13 +19,12 @@ export const calculationRoutes: Routes = [
       children: [
             { path: 'general', component: GeneralComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'General' } },
             { path: 'spaces', component: SpacesComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Spaces' } },
-            { path: 'review', component: CalculationComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Review' } },
-            { path: 'summary', component: CalculationComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Summary' } },
-            { path: 'approval', component: CalculationComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Approval' } },
-            { path: 'confirmation', component: CalculationComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Confirmation' } },
-            { path: 'finish', component: CalculationComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Finish' } },
-            
+            { path: 'kitchen', component: KitchensComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Kithen' } },
+            { path: 'plumbing', component: ToiletsComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Plumbing' } },
+            { path: 'additional', component: AdditionalComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Additional' } },
+            { path: 'summary', component: SummaryComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Summary' } },            
           ]
      },
+    { path: 'calculation', component: CalculationComponent, canActivate: [authorizationGuard], data: { breadcrumb: 'Finish' } },
     { path: '**', redirectTo: '/dashboard' }
   ];

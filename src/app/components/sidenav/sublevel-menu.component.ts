@@ -43,7 +43,6 @@ export class SublevelMenuComponent implements OnInit {
   }
 
   handleClick(item: any): void {
-    // debugger
     if (!this.multiple) {
       if (this.data.items && this.data.items.length > 0) {
         for(let modelItem of this.data.items) {

@@ -1,5 +1,9 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component } from '@angular/core';
+import { StepHandlerService } from '../step-handler.service';
+import { ActivatedRoute } from '@angular/router';
+import { CalculationService } from '../../calculation.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 
 interface Space {
   id: string;
@@ -36,42 +40,95 @@ interface Space {
     ])
   ]
 })
+
 export class SpacesComponent {
   spaceGroups = [
-    {
-      id: 'main-spaces',
-      name: 'Main Spaces',
-      types: [
-        'Living room', 'Kitchen', 'Living room with open kitchen', 'Living-bedroom with open kitchen',
-        'Living room and bedroom', 'Bedroom', 'Bathroom', 'Bathroom with toilet',
-        'Attic', 'Extra room'
-      ]
-    },
-    {
-      id: 'other-spaces',
-      name: 'Other Spaces',
-      types: [
-        'Salvage', 'Barn', 'Cellar', 'Scullery', 'Toilet room', 'Built-in cupboard larger than 2 m²',
-        'Room smaller than 4 m²', 'Washroom', 'Attic storage room with staircase',
-        'Attic storage room without fixed staircase', 'Garage', 'Hall, corridor or landing'
-      ]
-    },
-    {
-      id: 'outdoor-spaces',
-      name: 'Outdoor Spaces',
-      types: [
-        'Backyard', 'Front yard', 'Side garden', 'Balcony', 'Terrace',
-        'Loggia', 'Bicycle storage', 'Communal outdoor space only'
-      ]
-    }
   ];
 
   groupedSpaces: Record<string, Space[]> = {};
   showAddSpaceModal: boolean = false;
   selectingGroup: boolean = true;
   collapsedGroups: Record<string, boolean> = {};
+  calculationId: string = '';
+  stepId: string = '';
+  data: any = null;
+
+  constructor(
+    private stepHandler: StepHandlerService,
+    private route: ActivatedRoute,
+    private calculationService: CalculationService,
+    private toastService: ToastService,
+  ) { }
 
   ngOnInit(): void {
+    const state = history.state;
+    this.stepHandler.registerSaveHandler(this.saveStep.bind(this));
+    this.calculationId = this.route.parent?.snapshot.paramMap.get('id') || '';
+    this.stepId = state?.stepId;
+
+    this.loadSpaceGroups();
+  }
+
+  async loadSpaceGroups() {
+    return this.calculationService.getSpaceGroups().subscribe({
+      next: (groups) => {
+        let groupsData = groups.reduce((acc, group) => {
+          let groupData = acc.find(g => g.id === group.groupId);
+          if (!groupData) {
+            groupData = {
+              id: group.groupId,
+              name: group.groupId == 'main-spaces' ? 'Main Spaces' : group.groupId == 'other-spaces' ? 'Other Spaces' : 'Outdoor Spaces',
+              types: []
+            };
+            acc.push(groupData);
+          }
+          groupData.types.push({
+            id: group.id,
+            label: group.typeDesc
+          });
+          return acc;
+        }, []);
+
+        this.spaceGroups = groupsData;
+
+        this.loadData(this.calculationId, this.stepId);
+      }
+    });
+  }
+
+  async loadData(calculationId: string, stepId: string) {
+    this.startGrouping();
+
+    let self = this;
+    this.calculationService.getStepData(calculationId, stepId).subscribe({
+      next: (dataObj) => {
+        self.data = dataObj;
+        if (dataObj && dataObj.length > 0) {
+          self.groupedSpaces = dataObj.reduce((acc, space) => {
+            let groupId = self.getGroupId(space.spaceTypeId);
+            if (!(groupId in acc)) {
+              acc[groupId] = [];
+            }
+            acc[groupId].push({
+              group: groupId,
+              length: space.length,
+              width: space.width,
+              area: space.squareArea,
+              type: space.spaceTypeId,
+              heating: space.heating,
+              cooling: space.cooling
+            });
+            return acc;
+          }, {} as Record<string, Space[]>);
+        }
+      },
+      error: (error) => {
+        console.error('Could not load step data');
+      }
+    });
+  }
+
+  startGrouping(): void {
     this.groupedSpaces = this.spaceGroups.reduce((acc, group) => {
       acc[group.id] = [];
       return acc;
@@ -80,10 +137,42 @@ export class SpacesComponent {
     this.collapseAll();
   }
 
+  ngOnDestroy(): void {
+    this.stepHandler.clearHandler();
+  }
+  
+  getGroupId(type: string): string {
+    return this.spaceGroups.find(g => g.types.find(t => t.id === type))?.id || '';
+  }
+  
+  saveStep() {
+    if (!this.validateNextPage()) {
+      return Promise.resolve({ success: false });
+    }
+
+    return new Promise((resolve) => {
+      this.calculationService.saveStepStep(this.calculationId, this.stepId, this.buildPostData()).subscribe({ 
+        next: (data) => {
+          if (data.success) {
+            this.toastService.success('Step saved successfully');
+            resolve({ success: true });
+          } else {
+            this.toastService.warning(data.message);
+            resolve({ success: false, message: 'Could not save step: ' + this.stepId });
+          }
+        },
+        error: (error) => {
+          this.toastService.warning('Could not save step: ' + this.stepId);
+          resolve({ success: false, message: 'Could not save step: ' + this.stepId });
+        },
+      });
+    });
+  }
+
   collapseAll(): void {
     Object.keys(this.groupedSpaces).forEach(group => {
       if (!(group in this.collapsedGroups)) {
-        this.collapsedGroups[group] = group != Object.keys(this.groupedSpaces)[0]; // Default is expanded
+        this.collapsedGroups[group] = group != Object.keys(this.groupedSpaces)[0];
       }
     });
   }
@@ -141,6 +230,10 @@ export class SpacesComponent {
     return this.spaceGroups.find(g => g.id === selectedGroup)?.types
   }
 
+  showHeatingCooling(selectedGroup): boolean {
+    return this.spaceGroups.find(g => g.id === selectedGroup)?.id != 'outdoor-spaces';
+  }
+
   calculateArea(): void {
     this.newSpace.area = this.newSpace.length * this.newSpace.width;
   }
@@ -167,5 +260,31 @@ export class SpacesComponent {
       heating: false,
       cooling: false
     };
+  }
+
+  getSpaceTypeName(type: string): string {
+    return this.spaceGroups.find(g => g.types.find(t => t.id === type))?.types.find(t => t.id === type)?.label || '';
+  }
+
+
+  validateNextPage(): boolean {
+    if (Object.values(this.groupedSpaces).flat().length === 0) {
+      this.toastService.warning('Please add at least one space');
+      return false;
+    }
+
+    return true;
+  }
+
+  buildPostData(): any {
+    return Object.values(this.groupedSpaces).flat().map(space => ({
+      calculationId: this.calculationId,
+      length: space.length,
+      width: space.width,
+      squareArea: space.area,
+      heating: space.heating,
+      cooling: space.cooling,
+      spaceTypeId: space.type
+    }))
   }
 }

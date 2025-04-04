@@ -1,11 +1,134 @@
 <div class="general-container">
-  <button wwsBtn="primary" (click)="loadWozValues()">Get WOZ Values</button>
-
-  <div *ngIf="wozAmounts">
-    <label for="quarter-period">Quarter Period:</label>
-    <select id="quarter-period" [(ngModel)]="selectedWozValue" class="dropdown-quarter">
-      <option value="" disabled selected>Choose a period...</option>
-      <option *ngFor="let woz of wozAmounts" [value]="woz.period">$ {{ woz.wozAmount }} - Period: {{ woz.period }}</option>
-    </select>
+  <div class="card-section woz-section">
+    <h3 class="section-title">WOZ Value</h3>
+  
+    <button wwsBtn="primary" (click)="loadWozValues()" [disabled]="wozAmounts?.length > 0 || !validBagId">
+      {{ wozAmounts?.length ? 'WOZ Values Loaded' : 'Get WOZ Values' }}
+    </button>
+    <div *ngIf="!validBagId" class="button-hint">
+      BAG not found for this address
+    </div>
+  
+    <div *ngIf="wozAmounts?.length > 0" class="woz-select-wrapper">
+      <label for="quarter-period">Select Period:</label>
+      <select id="quarter-period" [(ngModel)]="selectedWozValue" class="dropdown-quarter">
+        <option value="" disabled selected>Choose a period...</option>
+        <option *ngFor="let woz of wozAmounts" [value]="woz.period">
+          € {{ woz.wozAmount | number: '1.0-2' }} - Period: {{ woz.period }}
+        </option>
+      </select>
+    </div>
+  
+    <div class="woz-override-toggle">
+      <input type="checkbox" id="enableOverride" [(ngModel)]="enableManualOverride" />
+      <label for="enableOverride">Override WOZ value manually</label>
+    </div>
+  
+    <div *ngIf="enableManualOverride" class="woz-override">
+      <label for="manualWoz">Manual WOZ Value:</label>
+      <input
+        type="number"
+        id="manualWoz"
+        [(ngModel)]="manualWozValue"
+        placeholder="e.g. 123456.00"
+        class="manual-input"
+      />
+    </div>
   </div>
+
+  <div class="card-section el-section">
+    <div class="section-header">
+      <h3 class="section-title">Energy Label</h3>
+      <button class="info-toggle" type="button" (click)="showElInfo = !showElInfo" title="Show business rules">
+        <i class="fa fa-info-circle"></i>
+      </button>
+    </div>
+
+    <div *ngIf="showElInfo" class="el-info-box">
+      <p>
+        Indicate whether a valid Energy Index (EI) or an Energy Label has been issued.
+        Old Energy Labels: issued until 1 Jan 2015.<br />
+        Energy Index: valid from 1 Jan 2015.<br />
+        Since 1 Jan 2021: renewed Energy Label (area size affects classification).
+      </p>
+    </div>
+  
+    <button wwsBtn="primary" (click)="loadEnergyLabelData()" [disabled]="!validBagId || energyLabelApiData">
+      {{ energyLabelApiData ? 'Energy Label Fetched' : 'Get Energy Label (EP-Online)' }}
+    </button>
+
+    <div *ngIf="!validBagId" class="button-hint">BAG not found for this address</div>
+  
+    <div *ngIf="energyLabelApiData" class="el-result-card">
+      <p><strong>Label:</strong> {{ energyLabelApiData.Energieklasse }}</p>
+      <p><strong>Index:</strong> {{ energyLabelApiData.EnergieIndex }}</p>
+      <p><strong>Registered:</strong> {{ energyLabelApiData.Registratiedatum | date:'mediumDate' }}</p>
+      <button class="reapply-btn" (click)="applyEnergyLabelRules(energyLabelApiData)">
+        <i class="fa fa-sync-alt"></i> Re-apply Rules
+      </button>
+    </div>
+  
+    <div class="el-radio-toggle-group">
+      <label *ngFor="let type of energyLabelTypes"
+             class="toggle-option"
+             [class.active]="selectedLabelType === type.value">
+        <input type="radio"
+               name="energyLabelType"
+               [value]="type.value"
+               [(ngModel)]="selectedLabelType" />
+        {{ type.label }}
+      </label>
+    </div>    
+  
+    <div *ngIf="selectedLabelType === 'label' || selectedLabelType === 'label_new'" class="el-subgroup">
+      <label for="elLabel">Select Energy Label:</label>
+      <select id="elLabel" [(ngModel)]="selectedEnergyLabel">
+        <option *ngFor="let option of energyLabelOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+  
+    <div *ngIf="selectedLabelType === 'label_new'" class="el-subgroup">
+      <label for="elSurface">Surface Area:</label>
+      <select id="elSurface" [(ngModel)]="selectedSurfaceArea">
+        <option value="lt25">Less than 25 m²</option>
+        <option value="25to40">25 - 40 m²</option>
+        <option value="gt40">More than 40 m²</option>
+      </select>
+    </div>
+  
+    <div *ngIf="selectedLabelType === 'index'" class="el-subgroup">
+      <label for="elIndex">Energy Index Range:</label>
+      <select id="elIndex" [(ngModel)]="selectedEnergyIndex">
+        <option *ngFor="let range of energyIndexRanges" [value]="range">{{ range }}</option>
+      </select>
+    </div>
+  </div>
+  
+  
+
+  <app-modal
+    class="adresses-modal"
+    [show]="showAddWozValueModal"
+    title="Select Address"
+    [actions]="[
+      { title: 'Cancel', type: 'secondary', position: 'left', action: this.closeAddressModal.bind(this) },
+      { title: 'Select', type: 'primary', position: 'right', action: this.selectAddress.bind(this), disabled: !selectedAddress }
+    ]"
+    (onClose)="closeAddressModal()"
+  >
+    <div class="address-list">
+      <div
+        *ngFor="let addr of addressSelectionModal"
+        class="address-card"
+        [class.selected]="selectedAddress === addr.id"
+        (click)="selectCard(addr.id)"
+      >
+        <div class="check-icon" *ngIf="selectedAddress?.id === addr.id">
+          <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="address-main">{{ addr.address }}</div>
+        <div class="address-type">{{ addr.addressType }}</div>
+      </div>
+    </div>  
+  </app-modal>
 </div>

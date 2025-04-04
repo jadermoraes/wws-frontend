@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { StepHandlerService } from '../../steps/step-handler.service';
 
 export interface Step {
+  id: string;
   label: string;
   completed: boolean;
   enabled: boolean;
@@ -20,6 +22,7 @@ export class StepsHeaderComponent {
 
   constructor(private translate: TranslateService,
     private router: Router,
+    private stepHandler: StepHandlerService
   ) { }
 
   get currentStep(): string {
@@ -33,7 +36,7 @@ export class StepsHeaderComponent {
 
         const currentUrl = this.router.url.split('/');
         currentUrl[currentUrl.length - 1] = this.steps[index].href;
-        this.router.navigate([currentUrl.join('/')]);
+        this.router.navigate([currentUrl.join('/')], { state: { stepId: this.steps[index].id } });
       }
     }
   }

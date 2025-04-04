@@ -1,6 +1,6 @@
 <div class="spaces-container">
   <div class="add-space-div">
-    <button class="add-space-btn" wwsBtn="primary" (click)="openAddSpaceModal()">+ Add Space</button>
+    <button wwsBtn="primary" class="m-b-md" (click)="openAddSpaceModal()">+ Add Space</button>
   </div>
 
   <div *ngFor="let group of groupedSpaces | keyvalue" class="space-group">
@@ -25,7 +25,7 @@
 
         <div *ngFor="let space of group.value" class="space-row">
           <div>
-            <input type="text" [value]="space.type" class="readonly-input" disabled>
+            <input type="text" [value]="getSpaceTypeName(space.type)" class="readonly-input" disabled>
           </div>
           <div>
             <input type="text" [value]="space.length + 'm x ' + space.width + 'm'" class="readonly-input" disabled>
@@ -87,7 +87,7 @@
     <div *ngIf="!selectingGroup" @fadeIn>
       <label class="m-b-sm" for="type">Type</label>
       <select id="type" [(ngModel)]="newSpace.type" class="form-control">
-        <option *ngFor="let type of getGroupOptions(newSpace.group)" [value]="type">{{ type }}</option>
+        <option *ngFor="let type of getGroupOptions(newSpace.group)" [value]="type.id">{{ type.label }}</option>
       </select>
 
       <div class="dimension-group m-t-md">
@@ -106,7 +106,7 @@
           <input id="area" type="number" [(ngModel)]="newSpace.area" class="form-control" />
         </div>
 
-        <div class="toggle-group m-t-lg">
+        <div *ngIf="showHeatingCooling(newSpace.group)" class="toggle-group m-t-lg">
           <button class="toggle-btn heating" [class.active]="newSpace.heating" (click)="newSpace.heating = !newSpace.heating">
             <i class="fa fa-fire"></i> 
           </button>

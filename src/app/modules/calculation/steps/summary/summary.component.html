@@ -1,0 +1,88 @@
+<div class="summary-container" *ngIf="summary; else loading">
+
+  <!-- Property Info -->
+  <div class="summary-section">
+    <h3 class="summary-title">Property</h3>
+    <div class="summary-row"><strong>Address:</strong> {{ summary.property.streetName }} {{ summary.property.propertyNumber }}{{ summary.property.propertyLetter }}</div>
+    <div class="summary-row"><strong>Zip Code:</strong> {{ summary.property.zipCode }}</div>
+    <div class="summary-row"><strong>Place:</strong> {{ summary.property.place }}</div>
+    <div class="summary-row"><strong>Reference:</strong> {{ summary.property.reference || '—' }}</div>
+    <div class="summary-row"><strong>Rent:</strong> € {{ summary.property.currentRent | number:'1.2-2' }}</div>
+  </div>
+
+  <!-- General Info -->
+  <div class="summary-section">
+    <h3 class="summary-title">General</h3>
+    <div class="summary-row"><strong>WOZ Period:</strong> {{ summary.general.wozPeriod || '—' }}</div>
+    <div class="summary-row"><strong>WOZ Value:</strong> € {{ summary.general.wozAmount || '—' }}</div>
+    <div class="summary-row"><strong>Energy Label Type:</strong> {{ summary.general.elType || '—' }}</div>
+    <div *ngIf="summary.general.elLabel" class="summary-row"><strong>Energy Label:</strong> {{ summary.general.elLabel }}</div>
+    <div *ngIf="summary.general.elSurfaceCategory" class="summary-row"><strong>Surface Category:</strong> {{ summary.general.elSurfaceCategory }}</div>
+    <div *ngIf="summary.general.elIndexRange" class="summary-row"><strong>Energy Index:</strong> {{ summary.general.elIndexRange }}</div>
+  </div>
+
+  <!-- Spaces -->
+  <div class="summary-section">
+    <h3 class="summary-title">Spaces</h3>
+    <div *ngFor="let space of summary.spaces" class="summary-row">
+      <div><strong>{{ getSpaceTypeName(space.spaceTypeId) }}</strong> - {{ space.length }}m x {{ space.width }}m ({{ space.squareArea }} m²)
+        <span *ngIf="space.heating">🔥</span>
+        <span *ngIf="space.cooling">❄️</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kitchens -->
+  <div class="summary-section">
+    <h3 class="summary-title">Kitchens</h3>
+    <div *ngFor="let kitchen of summary.kitchens" class="summary-row">
+      <div><strong>{{ kitchen.spaceName }}</strong></div>
+      <div>Countertop Length: {{ kitchen.kitchenCountertopLength || '—' }}</div>
+      <div *ngIf="kitchen.kitchenFacilities?.length > 0">
+        Facilities:
+        <ul>
+          <li *ngFor="let f of kitchen.kitchenFacilities">
+            {{ f.label }} (x{{ f.quantity }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toilets -->
+  <div class="summary-section">
+    <h3 class="summary-title">Toilets</h3>
+    <div *ngFor="let toilet of summary.toilets" class="summary-row">
+      <div><strong>{{ toilet.spaceName }}</strong></div>
+      <div>Regular: {{ toilet.toilets }} | Floating: {{ toilet.floatingToilets }}</div>
+      <div>Washbasins: Single {{ toilet.singleWashbasins }}, Multi {{ toilet.multiWashbasins }}</div>
+      <div>Shower/Bath: {{ toilet.showerType || '—' }}</div>
+      <div *ngIf="toilet.toiletFacilities?.length > 0">
+        Facilities:
+        <ul>
+          <li *ngFor="let f of toilet.toiletFacilities">
+            {{ f.label }} (x{{ f.quantity }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional -->
+  <div class="summary-section">
+    <h3 class="summary-title">Additional Info</h3>
+    <div class="summary-row"><strong>Monument:</strong> {{ summary.additional.monument ? 'Yes' : 'No' }}</div>
+    <div class="summary-row"><strong>Care Home:</strong> {{ summary.additional.careHome ? 'Yes' : 'No' }}</div>
+    <div class="summary-row"><strong>Disabled Facilities:</strong> {{ summary.additional.disabledFacilities ? 'Yes' : 'No' }}</div>
+    <div class="summary-row"><strong>Video Phone:</strong> {{ summary.additional.videoPhone ? 'Yes' : 'No' }}</div>
+    <div class="summary-row"><strong>Renovations:</strong> {{ summary.additional.renovations ? 'Yes' : 'No' }}</div>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <div class="summary-loading">
+    <div class="spinner"></div>
+    <p>Loading summary...</p>
+  </div>
+</ng-template>
