@@ -67,4 +67,8 @@ export class CalculationService {
     startCalculation(calculation: string): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/${calculation}/start`, {});
     }
+
+    getCalculationOverview(calculation: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/${calculation}/overview`);
+    }
 }

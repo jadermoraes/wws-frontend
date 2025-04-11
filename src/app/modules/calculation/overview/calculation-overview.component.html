@@ -1,23 +1,24 @@
-<div class="calculation-overview">
+@if(data) {
+  <div class="calculation-overview">
     <header>
-      <h1 class="title">Checks · Prinses Catharina Amaliaalaan 40, Zeist</h1>
+      <h1 class="title">Checks · {{data?.propertyName}}</h1>
       <button class="btn-additional" (click)="addCalculation()">Additional Calculation</button>
     </header>
     
     <div class="overview-container">
       <div class="image-container">
-        <img src="https://media.istockphoto.com/id/1442148484/pt/foto/3d-rendering-of-modern-suburban-house-in-the-garden.jpg?s=612x612&w=0&k=20&c=bMCTqppA_jx3P-aeF7MgvwLfyskKvoBUlcp8DLLQwIw=" alt="House Image" class="house-image" />
+        <img [src]="data?.picture" alt="House Image" class="house-image" />
       </div>
       
       <section class="calculation-details">
-        <h2 class="section-title">Period {{ selectedPeriod?.label }}</h2>
+        <h2 class="section-title">Period {{ data?.period }}</h2>
         <div class="details-grid">
-          <div class="detail-item"><strong>Created on:</strong> {{ selectedPeriod?.createdOn }}</div>
-          <div class="detail-item"><strong>Created by:</strong> {{ selectedPeriod?.createdBy }}</div>
-          <div class="detail-item"><strong>Last edited on:</strong> {{ selectedPeriod?.lastEdited }}</div>
-          <div class="detail-item"><strong>Total points:</strong> {{ selectedPeriod?.totalPoints }}</div>
-          <div class="detail-item"><strong>Maximum rental price:</strong> {{ selectedPeriod?.maxPrice }}</div>
-          <div class="detail-item"><strong>Current rental price:</strong> {{ selectedPeriod?.currentPrice }} 
+            <div class="detail-item"><strong>Created on:</strong> {{ data?.createdOn | date:'MMMM d, y' }}</div>
+          <div class="detail-item"><strong>Created by:</strong> {{ data?.createdBy }}</div>
+          <div class="detail-item"><strong>Reference:</strong> {{ data?.reference }}</div>
+          <div class="detail-item"><strong>Total points:</strong> {{ data?.totalPoints }}</div>
+          <div class="detail-item"><strong>Maximum rental price:</strong> {{ data?.maxRent }}</div>
+          <div class="detail-item"><strong>Current rental price:</strong> {{ data?.currentRent }} 
             <span class="edit-price" (click)="editPrice()">✎</span>
           </div>
         </div>
@@ -27,6 +28,12 @@
     <div class="actions-container">
       <button class="btn-modify" (click)="modifyCalculation()">Modify</button>
       <button class="btn-export" (click)="exportPDF()">Export PDF</button>
-      <button class="btn-remove" (click)="removeCalculation()">Remove</button>
+      <button class="btn-back" (click)="exitPage()">Return to List</button>
     </div>
   </div>
+} @else {
+    <div class="no-data">
+      <h2>No calculation data available</h2>
+      <p>Please start a new calculation.</p>
+    </div>
+}

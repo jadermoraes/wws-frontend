@@ -37,20 +37,21 @@ export class CalculationComponent implements OnInit {
 
   startCalculation(calculationId: string) {
     this.calculationInProgress = true;
-    // this.calculationService.startCalculation(calculationId).subscribe({
-    //   next: (response) => {
-    //     this.toastService.success('Calculation started successfully.');
-    //     this.router.navigate(['/calculations', calculationId, 'steps']);
-    //   },
-    //   error: (error) => {
-    //     this.toastService.danger('Failed to start calculation.');
-    //   },
-    //   complete: () => {
-    //     setTimeout(() => {
-    //       this.calculationInProgress = false;
-    //     }, 10000);
-    //   }
-    // });
+    this.calculationService.startCalculation(calculationId).subscribe({
+      next: (response) => {
+        this.toastService.success('Calculation started successfully.');
+      },
+      error: (error) => {
+        this.toastService.danger('Failed to start calculation.');
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.calculationInProgress = false;
+
+          this.router.navigate(['/calculations', calculationId, 'overview']);
+        }, 10000);
+      }
+    });
 
     setTimeout(() => {
       this.calculationInProgress = false;

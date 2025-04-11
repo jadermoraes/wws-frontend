@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WozValues } from 'src/app/shared/interfaces/wozValues';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { StepHandlerService } from '../step-handler.service';
+import { ConfirmationComponent } from 'src/app/shared/components/confirmation/confirmation.component';
+import { ConfirmationService } from 'src/app/shared/services/confirmation.service';
 
 @Component({
   selector: 'app-summary',
@@ -25,7 +27,8 @@ export class SummaryComponent implements OnDestroy {
     private route: ActivatedRoute,
     private toastService: ToastService,
     private stepHandler: StepHandlerService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService,
   ) { }
   
   ngOnInit() {
@@ -90,9 +93,17 @@ export class SummaryComponent implements OnDestroy {
     });
   }
   
-  saveStep(): Promise<any> {
-    this.router.navigate(['/calculations', 'calculation'], { state: { calculationId: this.calculationId } });
-    return Promise.resolve({ success: true });
+  async saveStep(): Promise<any> {
+    const confirmed = await this.confirmationService.confirm({
+      title: 'Calculation',
+      message: `Are you sure you want to process this calculation?`,
+      theme: 'default'
+    });
+  
+    if (confirmed) {
+      this.router.navigate(['/calculations', 'calculation'], { state: { calculationId: this.calculationId } });
+      return Promise.resolve({ success: true });
+    }
   }
 
   getSpaceTypeName(type: string): string {
