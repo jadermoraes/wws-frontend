@@ -24,7 +24,7 @@ export class CalculationNewComponent {
 
   async getAvailablePeriods() {
     await this.calculationService.getPeriods().subscribe(periods => {
-      this.quarterPeriods = periods.map(period => ({ periodId: period.periodId, periodName: period.periodName }));
+      this.quarterPeriods = periods.map(period => ({ periodId: period.id, periodName: period.name }));
     }, error => {
       this.toastService.danger(error.message); 
     });

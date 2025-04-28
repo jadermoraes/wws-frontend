@@ -70,6 +70,12 @@ export class NavbarData {
                         label: this.translate.instant('sidebar.settings.invitations'),
                         adminGuard: false,
                     },
+                    {
+                        routeLink: 'settings/periods',
+                        icon: 'fal fa-calendar',
+                        label: 'Periods',
+                        adminGuard: true,
+                    },
                 ]
             },
         ]

@@ -92,3 +92,20 @@
     }
   }
 }
+
+.no-kitchens {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--primary-text-color);
+  font-size: 1rem;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    color: var(--theme);
+  }
+
+  p {
+    margin: 4px 0;
+  }
+}

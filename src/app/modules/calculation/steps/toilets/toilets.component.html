@@ -1,67 +1,76 @@
-<div class="toilet-section" *ngFor="let toilet of toilets">
-  <div class="toilet-card">
-    <div class="toilet-header">
-      <h4>{{ toilet.spaceName }}</h4>
-    </div>
-
-    <div class="toilet-content">
-      <!-- Inputs for fixtures -->
-      <div class="form-group-grid">
-        <div class="form-group">
-          <label>Regular Toilets</label>
-          <input type="number" min="0" [(ngModel)]="toilet.regularToilets" />
-        </div>
-        <div class="form-group">
-          <label>Floating Toilets</label>
-          <input type="number" min="0" [(ngModel)]="toilet.floatingToilets" />
-        </div>
-        <div class="form-group">
-          <label>Single Washbasin</label>
-          <input type="number" min="0" [(ngModel)]="toilet.singleWashbasin" />
-        </div>
-        <div class="form-group">
-          <label>Multi-person Washbasin</label>
-          <input type="number" min="0" [(ngModel)]="toilet.multiWashbasin" />
-        </div>
+<div *ngIf="toilets?.length > 0; else noToiletsFound">
+  <div class="toilet-section" *ngFor="let toilet of toilets">
+    <div class="toilet-card">
+      <div class="toilet-header">
+        <h4>{{ toilet.spaceName }}</h4>
       </div>
 
-      <!-- Shower/Bath Selection -->
-      <div class="form-group">
-        <label>Shower/Bath</label>
-        <div class="toggle-group-options">
-          <button
-            class="toggle-option"
-            *ngFor="let option of bathOptions"
-            [class.active]="toilet.bathOption === option.value"
-            (click)="toilet.bathOption = option.value"
-            type="button"
-          >
-            {{ option.label }}
-          </button>
-        </div>
-      </div>      
-
-      <!-- Facilities -->
-      <div class="facilities-group">
-        <label>Facilities</label>
-        <div class="facility-list">
-          <div class="facility-chip" *ngFor="let facility of toilet.toiletFacilities">
-            {{ facility.label }} ({{ facility.quantity }})
-            <button (click)="removeFacility(toilet, facility)">&times;</button>
+      <div class="toilet-content">
+        <!-- Inputs for fixtures -->
+        <div class="form-group-grid">
+          <div class="form-group">
+            <label>Regular Toilets</label>
+            <input type="number" min="0" [(ngModel)]="toilet.regularToilets" />
+          </div>
+          <div class="form-group">
+            <label>Floating Toilets</label>
+            <input type="number" min="0" [(ngModel)]="toilet.floatingToilets" />
+          </div>
+          <div class="form-group">
+            <label>Single Washbasin</label>
+            <input type="number" min="0" [(ngModel)]="toilet.singleWashbasin" />
+          </div>
+          <div class="form-group">
+            <label>Multi-person Washbasin</label>
+            <input type="number" min="0" [(ngModel)]="toilet.multiWashbasin" />
           </div>
         </div>
 
-        <button class="add-facility-btn" (click)="openFacilityModal(toilet)">+ Add Facility</button>
+        <!-- Shower/Bath Selection -->
+        <div class="form-group">
+          <label>Shower/Bath</label>
+          <div class="toggle-group-options">
+            <button
+              class="toggle-option"
+              *ngFor="let option of bathOptions"
+              [class.active]="toilet.bathOption === option.value"
+              (click)="toilet.bathOption = option.value"
+              type="button"
+            >
+              {{ option.label }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Facilities -->
+        <div class="facilities-group">
+          <label>Facilities</label>
+          <div class="facility-list">
+            <div class="facility-chip" *ngFor="let facility of toilet.toiletFacilities">
+              {{ facility.label }} ({{ facility.quantity }})
+              <button (click)="removeFacility(toilet, facility)">&times;</button>
+            </div>
+          </div>
+
+          <button class="add-facility-btn" (click)="openFacilityModal(toilet)">+ Add Facility</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<ng-template #noToiletsFound>
+  <div class="no-toilets">
+    <i class="fa fa-toilet"></i>
+    <p>No plumbing spaces (toilets) found for this property.</p>
+    <p>If you think there should be, check your space definitions.</p>
+  </div>
+</ng-template>
+
+<!-- Facility Selector -->
 <app-facility-selector
   [show]="showFacilityModal"
   [facilities]="getAvailableFacilities(selectedToiletForFacility)"
   (add)="addFacility(selectedToiletForFacility, $event)"
   (close)="showFacilityModal = false"
 ></app-facility-selector>
-
-

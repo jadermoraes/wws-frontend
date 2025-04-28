@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { UsersComponent } from './users/users.component';
 import { isAdminGuard } from 'src/app/authorization/guards/is-admin.guard';
 import { InvitationsComponent } from './invitations/invitations.component';
+import { PeriodsComponent } from './periods/periods.component';
 
 export const settingsRoutes: Routes = [
   {
@@ -23,5 +24,11 @@ export const settingsRoutes: Routes = [
     component: InvitationsComponent,
     canActivate: [authorizationGuard],
     data: { breadcrumb: 'Invitations' }
+  },
+  {
+    path: 'periods',
+    component: PeriodsComponent,
+    canActivate: [authorizationGuard],
+    data: { breadcrumb: 'Periods' }
   },
 ];

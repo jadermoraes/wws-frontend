@@ -1,0 +1,56 @@
+<div class="periods-page">
+    <div class="page-header">
+      <h2>Periods</h2>
+      <button class="btn-primary" (click)="openCreateModal()">+ Add Period</button>
+    </div>
+  
+    <div *ngIf="periods && periods.length > 0; else noPeriods">
+      <table class="periods-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let period of periods">
+            <td>{{ period.name }}</td>
+            <td>{{ period.startDate | date:'mediumDate' }}</td>
+            <td>{{ period.endDate | date:'mediumDate' }}</td>
+            <td>
+              <button (click)="openEditModal(period)">Edit</button>
+              <button (click)="deletePeriod(period)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #noPeriods>
+      <div class="no-data">No periods found</div>
+    </ng-template>
+  
+    <app-modal *ngIf="selectedPeriod"
+      [show]="showModal"
+      [title]="selectedPeriod?.id ? 'Edit Period' : 'Create Period'"
+      [actions]="[
+            { title: 'Cancel', type: 'secondary', position: 'left', action: this.closeModal.bind(this) },
+            { title: selectedPeriod?.id ? 'Update' : 'Create', type: 'primary', position: 'right', action: this.savePeriod.bind(this), disabled: !selectedPeriod.name || !selectedPeriod.startDate || !selectedPeriod.endDate }
+        ]"
+      (onClose)="closeModal()"
+    >
+      <div class="modal-body" *ngIf="selectedPeriod">
+        <label>Name</label>
+        <input class="edit-text" type="text" [(ngModel)]="selectedPeriod.name" />
+  
+        <label>Start Date</label>
+        <input class="edit-text" type="date" [(ngModel)]="selectedPeriod.startDate" />
+  
+        <label>End Date</label>
+        <input class="edit-text" type="date" [(ngModel)]="selectedPeriod.endDate" />
+      </div>
+    </app-modal>
+  </div>
+  

@@ -8,12 +8,14 @@ import { LayoutComponent } from './layout/layout.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { UsersComponent } from './users/users.component';
 import { InvitationsComponent } from './invitations/invitations.component';
+import { PeriodsComponent } from './periods/periods.component';
 
 
 const COMPONENTS_AND_DIRECTIVES = [
     LayoutComponent,
     UsersComponent,
-    InvitationsComponent
+    InvitationsComponent,
+    PeriodsComponent,
 ];
 
 @NgModule({

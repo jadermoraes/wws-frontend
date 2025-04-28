@@ -1,101 +1,137 @@
 .steps-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(to right, #1c262f, #34495e);
-    color: white;
-    border-bottom: 3px solid var(--primary-border);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .step-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-transform: uppercase;    
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  border-bottom: 3px solid var(--primary-border);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
 
-  .font-white {
-    color: white;
-  }
-  
-  .step-indicator {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-  }
-  
-  .step-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .step-circle-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-  .step-circle-wrapper:hover .step-circle {
-    transform: scale(1.2);
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-  }
-  
-  .step-circle {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #7f8c8d;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    border: 3px solid transparent;
-    position: relative;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Completed Step */
-  .step-circle.completed {
-    background: #27ae60;
-    border-color: #2ecc71;
-    font-size: 1.2rem;
-  }
-  
-  /* Active Step */
-  .step-circle.active {
-    background: #f1c40f;
-    border-color: #f39c12;
-    transform: scale(1.2);
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-  }
-  
-  /* Connecting Lines */
-  .step-line {
-    width: 50px;
-    height: 5px;
-    background: linear-gradient(to right, #7f8c8d, #95a5a6);
-    position: relative;
-    transition: background 0.3s;
-    margin-bottom: 20px;
-  }
-  
-  .step-container.completed .step-line {
-    background: linear-gradient(to right, #27ae60, #2ecc71);
-  }
-  
-  /* Step Text */
-  .step-text {
+.step-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--primary-text-color);
+  margin: 0;
+}
+
+.font-white {
+  color: var(--primary-text-color);
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.step-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.step-circle-wrapper:hover .step-circle {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.step-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #95a5a6;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Completed Step */
+.step-circle.completed {
+  background: #27ae60;
+  border-color: #2ecc71;
+  font-size: 1.1rem;
+}
+
+/* Active Step */
+.step-circle.active {
+  background: var(--theme);
+  border-color: var(--theme);
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+}
+
+/* Connecting Lines */
+.step-line {
+  width: 60px;
+  height: 3px;
+  background: var(--tertiary-color);
+  transition: all 0.3s;
+}
+
+.step-container.completed .step-line {
+  background: linear-gradient(to right, #2ecc71, #27ae60);
+}
+
+/* Step Text */
+.step-text {
+  font-size: 0.9rem;
+  color: var(--primary-text-color);
+  margin-top: 6px;
+  text-align: center;
+  font-weight: 500;
+  max-width: 80px;
+}
+
+.exit-button-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+}
+
+.exit-btn {
+  background: none;
+  border: 1px solid var(--theme);
+  color: var(--theme);
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+
+  i {
     font-size: 1rem;
-    color: white;
-    margin-top: 8px; /* Space between circle and text */
-    text-align: center;
-    font-weight: normal;
-    word-wrap: break-word;
   }
-  
+
+  &:hover {
+    background: var(--theme);
+    color: white;
+  }
+}

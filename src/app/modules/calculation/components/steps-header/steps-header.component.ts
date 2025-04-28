@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { StepHandlerService } from '../../steps/step-handler.service';
+import { EventEmitter, Output } from '@angular/core';
+import { ConfirmationService } from 'src/app/shared/services/confirmation.service';
 
 export interface Step {
   id: string;
@@ -19,10 +21,13 @@ export interface Step {
 export class StepsHeaderComponent {
   @Input() steps: Step[] = [];
   @Input() currentStepIndex: number = 0;
+  @Output() stepSelected = new EventEmitter<number>();
+
 
   constructor(private translate: TranslateService,
     private router: Router,
-    private stepHandler: StepHandlerService
+    private stepHandler: StepHandlerService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   get currentStep(): string {
@@ -30,15 +35,21 @@ export class StepsHeaderComponent {
   }
 
   goToStep(index: number) {
-    if (this.steps[index].enabled) {
-      if (index !== this.currentStepIndex) {
-        this.currentStepIndex = index;
-
-        const currentUrl = this.router.url.split('/');
-        currentUrl[currentUrl.length - 1] = this.steps[index].href;
-        this.router.navigate([currentUrl.join('/')], { state: { stepId: this.steps[index].id } });
-      }
+    if (this.steps[index].enabled && index !== this.currentStepIndex) {
+      this.stepSelected.emit(index);
     }
   }
+  
+  async onExit() {
+    const confirmed = await this.confirmationService.confirm({
+      title: 'Calculation',
+      message: `Do you want to leave this calculation process? All unsaved changes will be lost.`,
+    });
+  
+    if (confirmed) {
+      this.router.navigate(['/properties', 'list']);
+    }
+  }
+  
   
 }

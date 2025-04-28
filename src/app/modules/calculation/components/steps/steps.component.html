@@ -1,15 +1,17 @@
 <div class="page-wrapper">
-    <app-steps-header [steps]="steps" [currentStepIndex]="currentStepIndex"></app-steps-header>
-  
-    <div class="step-main">
-      <div class="step-content-wrapper" [class.loading]="isSavingStep">
-        <div class="step-loading-overlay" *ngIf="isSavingStep">
-          <div class="spinner"></div>
-        </div>
-        <router-outlet></router-outlet>
-      </div>
+
+  <app-steps-header class="fixed-header"
+    [steps]="steps"
+    [currentStepIndex]="currentStepIndex"
+    (stepSelected)="onStepSelected($event)">
+  </app-steps-header>
+
+  <div class="step-scroll-wrapper">
+    <div class="step-content-wrapper">
+      <router-outlet></router-outlet>
     </div>
-  
-    <app-steps-footer [actions]="footerActions"></app-steps-footer>
   </div>
-  
+
+  <app-steps-footer class="fixed-footer" [actions]="footerActions"></app-steps-footer>
+
+</div>

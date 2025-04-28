@@ -92,6 +92,10 @@ export class StepsComponent implements OnInit {
     ];
   }
 
+  onStepSelected(index: number): void {
+    this.navigateToStep(index);
+  }  
+
   onBack(): void {
     if (this.currentStepIndex > 0) {
       this.navigateToStep(this.currentStepIndex - 1);

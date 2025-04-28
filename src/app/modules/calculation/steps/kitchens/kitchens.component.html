@@ -1,44 +1,53 @@
-<div class="kitchen-section" *ngFor="let kitchen of kitchens">
-  <div class="kitchen-card">
-    <div class="kitchen-header">
-      <h4>{{ kitchen.spaceName }}</h4>
-    </div>
-
-    <div class="kitchen-content">
-      <!-- Countertop size -->
-      <div class="form-group">
-        <label>Countertop Length</label>
-        <select [(ngModel)]="kitchen.kitchenCounterTop">
-          <option value="">Select length...</option>
-          <option value="0-0.5">0 - 0.5 m</option>
-          <option value="0.5-1">0.5 - 1 m</option>
-          <option value="1-2">1 - 2 m</option>
-          <option value=">2">More than 2 m</option>
-        </select>
+<div *ngIf="kitchens?.length > 0; else noKitchensFound">
+  <div class="kitchen-section" *ngFor="let kitchen of kitchens">
+    <div class="kitchen-card">
+      <div class="kitchen-header">
+        <h4>{{ kitchen.spaceName }}</h4>
       </div>
 
-      <!-- Facilities List -->
-      <div class="facilities-group">
-        <label>Facilities</label>
-
-        <div class="facility-list">
-          <div class="facility-chip" *ngFor="let facility of kitchen.kitchenFacilities">
-            {{ facility.label }} ({{ facility.quantity }})
-            <button (click)="removeFacility(kitchen, facility)">&times;</button>
-          </div>
+      <div class="kitchen-content">
+        <!-- Countertop size -->
+        <div class="form-group">
+          <label>Countertop Length</label>
+          <select [(ngModel)]="kitchen.kitchenCounterTop">
+            <option value="">Select length...</option>
+            <option value="0-0.5">0 - 0.5 m</option>
+            <option value="0.5-1">0.5 - 1 m</option>
+            <option value="1-2">1 - 2 m</option>
+            <option value=">2">More than 2 m</option>
+          </select>
         </div>
 
-        <button class="add-facility-btn" (click)="openFacilityModal(kitchen)">+ Add Facility</button>
+        <!-- Facilities List -->
+        <div class="facilities-group">
+          <label>Facilities</label>
+
+          <div class="facility-list">
+            <div class="facility-chip" *ngFor="let facility of kitchen.kitchenFacilities">
+              {{ facility.label }} ({{ facility.quantity }})
+              <button (click)="removeFacility(kitchen, facility)">&times;</button>
+            </div>
+          </div>
+
+          <button class="add-facility-btn" (click)="openFacilityModal(kitchen)">+ Add Facility</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<ng-template #noKitchensFound>
+  <div class="no-kitchens">
+    <i class="fa fa-utensils"></i>
+    <p>No kitchens found for this property.</p>
+    <p>If you think there should be kitchens, check your space definitions.</p>
+  </div>
+</ng-template>
+
+<!-- Facility Selector -->
 <app-facility-selector
   [show]="showFacilityModal"
   [facilities]="getAvailableFacilities(selectedKitchenForFacility)"
   (add)="addFacility(selectedKitchenForFacility, $event)"
   (close)="showFacilityModal = false"
 ></app-facility-selector>
-
-

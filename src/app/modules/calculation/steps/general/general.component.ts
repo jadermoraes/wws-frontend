@@ -13,7 +13,7 @@ import { StepHandlerService } from '../step-handler.service';
 })
 export class GeneralComponent implements OnDestroy {
   calculationId: string = '';
-  selectedWozValue: string = '';
+  selectedWozValue: string = null;
   wozAmounts: WozValues[] = [];
   showAddWozValueModal: boolean = false;
   addressSelectionModal: any = null;
@@ -28,6 +28,7 @@ export class GeneralComponent implements OnDestroy {
   energyLabelApiData: any = null;
   showElInfo = false;
   stepId: string = null;
+  wozFetched: boolean = false;
 
 
   data: any = null;
@@ -81,7 +82,6 @@ export class GeneralComponent implements OnDestroy {
             await self.loadWozValues();
           }
           setTimeout(() => {
-            self.selectedWozValue = self.data.wozPeriod;
             self.manualWozValue = self.data.wozAmount;
             self.enableManualOverride = self.data.isWozManual;
             self.selectedLabelType = self.data.elType;
@@ -166,13 +166,22 @@ export class GeneralComponent implements OnDestroy {
       if (data.success) {
         if (data.wozData) {
           this.wozAmounts = data.wozData;
+          if (this.wozAmounts.length > 0 && !this.selectedWozValue) {
+            this.selectedWozValue = this.wozAmounts[0].period;
+          }
         } else {
           this.showAddressSelectionModal(data.addresses);
         }          
       } else {
         this.toastService.warning(data.message);
       }
+
+      this.wozFetched = true;
     });
+  }
+
+  getWozByPeriod(period: string): WozValues | null {
+    return this.wozAmounts.find(woz => woz.period === period) || null;
   }
 
   loadEnergyLabelData(): void {
@@ -185,8 +194,7 @@ export class GeneralComponent implements OnDestroy {
       if (data.success) {
         if (data.elData) {
           this.energyLabelApiData = data.elData;
-  
-          // Auto-detect and apply selection logic here
+
           this.applyEnergyLabelRules(this.energyLabelApiData);
         } else {
           this.toastService.warning('No energy label data found for this address.');

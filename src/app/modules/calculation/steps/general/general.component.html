@@ -2,22 +2,30 @@
   <div class="card-section woz-section">
     <h3 class="section-title">WOZ Value</h3>
   
-    <button wwsBtn="primary" (click)="loadWozValues()" [disabled]="wozAmounts?.length > 0 || !validBagId">
+    <button wwsBtn="primary" (click)="loadWozValues()" [disabled]="wozFetched || !validBagId">
       {{ wozAmounts?.length ? 'WOZ Values Loaded' : 'Get WOZ Values' }}
     </button>
     <div *ngIf="!validBagId" class="button-hint">
       BAG not found for this address
     </div>
   
-    <div *ngIf="wozAmounts?.length > 0" class="woz-select-wrapper">
-      <label for="quarter-period">Select Period:</label>
-      <select id="quarter-period" [(ngModel)]="selectedWozValue" class="dropdown-quarter">
-        <option value="" disabled selected>Choose a period...</option>
-        <option *ngFor="let woz of wozAmounts" [value]="woz.period">
-          € {{ woz.wozAmount | number: '1.0-2' }} - Period: {{ woz.period }}
-        </option>
-      </select>
+    <div *ngIf="wozFetched">
+      <div class="woz-result" *ngIf="selectedWozValue; else noWozFound">
+        <label>WOZ Value:</label>
+        <div class="woz-value">
+          € {{ getWozByPeriod(selectedWozValue).wozAmount | number: '1.0-2' }} 
+          <span class="woz-period">({{ getWozByPeriod(selectedWozValue).period }})</span>
+        </div>
+      </div>
+      
+      <ng-template #noWozFound>
+        <div class="woz-no-result">
+          <i class="fa fa-exclamation-circle"></i>
+          <p>No WOZ value found for this property.</p>
+        </div>
+      </ng-template>
     </div>
+    
   
     <div class="woz-override-toggle">
       <input type="checkbox" id="enableOverride" [(ngModel)]="enableManualOverride" />
