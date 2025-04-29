@@ -71,6 +71,7 @@ export class ToiletsComponent {
               singleWashbasin: toilet.singleWashbasins,
               multiWashbasin: toilet.multiWashbasins,              
               toiletFacilities: toilet.toiletFacilities,
+              bathOption: toilet.showerType,
             })
           });          
         }
@@ -111,11 +112,11 @@ export class ToiletsComponent {
 
   validateNextPage(): boolean {
     for (const toilet of this.toilets) {
-      if (!toilet.regularToilets && !toilet.floatingToilets) {
+      if (toilet.regularToilets == null && toilet.floatingToilets == null) {
         this.toastService.warning('Please enter the number of regular or floating toilets');
         return false;
       }
-      if (!toilet.singleWashbasin && !toilet.multiWashbasin) {
+      if (toilet.singleWashbasin == null && toilet.multiWashbasin == null) {
         this.toastService.warning('Please enter the number of single or multi washbasins');
         return false;
       }
