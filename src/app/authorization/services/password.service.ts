@@ -11,7 +11,7 @@ export class PasswordService {
   ) {}
 
   verifyToken(token: string, email: string) {
-    return this.http.post(`/auth/password/validate-reset-token`,{token, email});
+    return this.http.post(`/auth/password/reset/validate`,{token, email});
   }
 
   resetPassword(token: string, email: string, password: string) {
@@ -19,7 +19,7 @@ export class PasswordService {
   }
 
   requestPasswordReset(email: string) {
-    return this.http.post(`/auth/password/request-reset`, { email });
+    return this.http.get(`/auth/password/reset/${email}`);
   }
 
 }

@@ -56,7 +56,7 @@ export class SessionService {
   }
 
   async updateSession() {
-    this.http.get<UserSession>('/auth/user/session').subscribe((userData: UserSession) => {
+    this.http.get<UserSession>('/user/session').subscribe((userData: UserSession) => {
       this.setUserDataSession(userData);
     });
   }
@@ -138,7 +138,8 @@ export class SessionService {
   }
 
   generateUserOTP() {
-    return this.http.post('/auth/otp/generate', {sessionId: localStorage.getItem('sessionId')})
+    let sessionId = localStorage.getItem('sessionId');
+    return this.http.get(`/auth/otp/${sessionId}`)
   }
 
   async validateLogin(token) {
@@ -149,7 +150,7 @@ export class SessionService {
   }
 
   validateOtp(otp: string, saveSession: boolean) {
-    return this.http.post('/auth/otp/validate', {sessionId: localStorage.getItem('sessionId'), passCode: otp, saveSession})
+    return this.http.post('/auth/otp/', {sessionId: localStorage.getItem('sessionId'), passCode: otp, saveSession})
   }
 
   isLoggedIn(): boolean {
@@ -204,7 +205,7 @@ export class SessionService {
   }
 
   setUserProperties(values: {key: string, value: any}[]) {
-    return this.http.post('/modules/settings/layout', values).subscribe({
+    return this.http.post('/modules/settings/preferences', values).subscribe({
       next: async (response: any) => {
         this.updateSession();
       },
@@ -217,15 +218,16 @@ export class SessionService {
 
 
   signup(newUser: NewUser) {
-    return this.http.post('/auth/user', newUser);
+    return this.http.post('/user', newUser);
   }
 
   validateUser(passCode: string) {
-    return this.http.post('/auth/user/validate', {sessionId: localStorage.getItem('sessionId'), passCode})
+    return this.http.post('/auth/user-validation', {sessionId: localStorage.getItem('sessionId'), passCode})
   }
 
   resendVerificationCode() {
-    return this.http.post('/auth/verification-code/resend', {sessionId: localStorage.getItem('sessionId')})
+    let sessionId = localStorage.getItem('sessionId');
+    return this.http.get(`/auth/user-validation/${sessionId}`)
   }
 
   getUserName() {

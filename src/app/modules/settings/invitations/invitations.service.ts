@@ -23,6 +23,6 @@ export class InvitationsService {
     }
 
     acceptInvitation(id: string): Observable<apiReturn> {
-        return this.http.post<apiReturn>(this.apiUrl + 'accept', {invitationId: id});
+        return this.http.post<apiReturn>(this.apiUrl + 'accept/' + id, {});
     }
 }
