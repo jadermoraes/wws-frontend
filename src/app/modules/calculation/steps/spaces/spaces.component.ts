@@ -239,6 +239,8 @@ export class SpacesComponent {
   }
 
   addNewSpace(): void {
+    console.log(this.newSpace)
+    console.log(this.groupedSpaces)
     if (this.newSpace.length > 0 && this.newSpace.width > 0) {
       this.groupedSpaces[this.newSpace.group].push({ ...this.newSpace });
       this.closeAddSpaceModal();
