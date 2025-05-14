@@ -104,12 +104,14 @@ export class SpacesComponent {
       next: (dataObj) => {
         self.data = dataObj;
         if (dataObj && dataObj.length > 0) {
-          self.groupedSpaces = dataObj.reduce((acc, space) => {
-            let groupId = self.getGroupId(space.spaceTypeId);
-            if (!(groupId in acc)) {
-              acc[groupId] = [];
+          for (const space of dataObj) {
+            const groupId = self.getGroupId(space.spaceTypeId);
+            if (!self.groupedSpaces[groupId]) {
+              self.groupedSpaces[groupId] = [];
             }
-            acc[groupId].push({
+
+            let spaceObj: Space = {
+              id: undefined,
               group: groupId,
               length: space.length,
               width: space.width,
@@ -117,9 +119,10 @@ export class SpacesComponent {
               type: space.spaceTypeId,
               heating: space.heating,
               cooling: space.cooling
-            });
-            return acc;
-          }, {} as Record<string, Space[]>);
+            }
+
+            self.groupedSpaces[groupId].push(spaceObj);
+          }
         }
       },
       error: (error) => {
@@ -209,7 +212,7 @@ export class SpacesComponent {
   };
 
   openAddSpaceModal(): void {
-    this.selectingGroup = true;
+    this.newSpace.group = 'main-spaces';
     this.showAddSpaceModal = true;
   }
 
@@ -247,6 +250,14 @@ export class SpacesComponent {
 
       this.collapseAll();
       this.toggleCollapse(this.newSpace.group);
+    }
+  }
+
+  addNewSpaceAndClear(): void {
+    if (this.newSpace.length > 0 && this.newSpace.width > 0) {
+      this.groupedSpaces[this.newSpace.group].push({ ...this.newSpace });
+      this.resetForm();
+      this.newSpace.group = 'main-spaces';
     }
   }
 

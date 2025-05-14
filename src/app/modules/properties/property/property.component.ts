@@ -204,6 +204,7 @@ export class PropertyComponent implements OnInit {
       }
     }, error: (error) => {
       this.toastService.danger('Error fetching address information');
+      this.propertyForm.enable();
     }, complete: () => {
       this.propertyForm.enable();
     }});

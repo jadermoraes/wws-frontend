@@ -2,9 +2,14 @@
   <div class="card-section woz-section">
     <h3 class="section-title">WOZ Value</h3>
   
-    <button wwsBtn="primary" (click)="loadWozValues()" [disabled]="wozFetched || !validBagId">
-      {{ wozAmounts?.length ? 'WOZ Values Loaded' : 'Get WOZ Values' }}
-    </button>
+    <button wwsBtn="primary" (click)="loadWozValues()" [disabled]="wozFetched || !validBagId || loadingWoz">
+      <ng-container *ngIf="!loadingWoz">
+        {{ wozAmounts?.length ? 'WOZ Values Loaded' : 'Get WOZ Values' }}
+      </ng-container>
+      <ng-container *ngIf="loadingWoz">
+        <i class="fa fa-spinner fa-spin"></i> Loading...
+      </ng-container>
+    </button>    
     <div *ngIf="!validBagId" class="button-hint">
       BAG not found for this address
     </div>
@@ -61,9 +66,14 @@
       </p>
     </div>
   
-    <button wwsBtn="primary" (click)="loadEnergyLabelData()" [disabled]="!validBagId || energyLabelApiData">
-      {{ energyLabelApiData ? 'Energy Label Fetched' : 'Get Energy Label (EP-Online)' }}
-    </button>
+    <button wwsBtn="primary" (click)="loadEnergyLabelData()" [disabled]="!validBagId || energyLabelApiData || loadingEl">
+      <ng-container *ngIf="!loadingEl">
+        {{ energyLabelApiData ? 'Energy Label Fetched' : 'Get Energy Label (EP-Online)' }}
+      </ng-container>
+      <ng-container *ngIf="loadingEl">
+        <i class="fa fa-spinner fa-spin"></i> Fetching...
+      </ng-container>
+    </button>    
 
     <div *ngIf="!validBagId" class="button-hint">BAG not found for this address</div>
   

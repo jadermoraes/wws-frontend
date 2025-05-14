@@ -1,22 +1,34 @@
 .spaces-container {
-    padding: 10px 15%;
+    padding: 10px 8%;
     margin: auto;
   }
   
-  .add-space-div {
-    width: 100%;
-    display: flex;
-    justify-content: left;
-  }
-
-  .add-space-btn {
-    width: 10%;
-    height: 40px;
-    font-size: medium;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .add-space-inline {
+    margin: 16px 0 24px 0;
+  
+    .btn-add-space {
+      background: var(--theme);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+  
+      i {
+        font-size: 14px;
+      }
+  
+      &:hover {
+        background: color-mix(in srgb, var(--theme) 94%, black 6%);
+      }
+    }
+  }  
   
   .space-group {
     margin-bottom: 20px;
@@ -123,100 +135,146 @@
     white-space: nowrap;
   }
 
-  .spaces-modal {
-    .space-group-selection {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
+  .spaces-modal.wide {
+    :host ::ng-deep .modal-container {
+      max-width: 900px;
+      width: 90%;
     }
   
-    .group-option {
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 20px;
-      font-size: 16px;
+    .modal-body.full-body {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      gap: 24px;
+    }
+  
+    .group-tabs {
+      display: flex;
       justify-content: center;
-      gap: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      width: 120px;
-      height: 120px;
-      text-align: center;
+      gap: 16px;
+      margin-bottom: 16px;
   
-      i {
-        font-size: 36px;
-      }
+      .group-tab {
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--primary-color);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.2s ease;
   
-      span {
-        font-size: 14px;
-      }
+        &.active {
+          background: var(--theme);
+          transform: scale(1.05);
+        }
   
-      &:hover {
-        background: var(--theme);
-        transform: scale(1.1);
+        i {
+          font-size: 24px;
+        }
       }
     }
   
-    .modal-body {
+    .form-area {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding: 20px;
-      transition: all 0.3s ease-in-out;
+      gap: 16px;
     }
   
-    .dimension-group {
+    .dimension-row {
       display: flex;
-      gap: 10px;
-      justify-content: space-between;
-  
-      div {
+      gap: 24px;
+      align-items: flex-end;
+    
+      .dimension-group {
+        display: flex;
         flex: 1;
+        gap: 16px;
+    
+        div {
+          flex: 1;
+        }
       }
-    }
-  
-    .toggle-group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 22px;
-    }
-  
-    .toggle-btn {
-      background: none;
-      border: 1px solid var(--border-color, #ccc);
-      padding: 8px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.3s ease;
-      flex: 1;
-      color: white;
-  
-      &.heating {
-        &.active {
+    
+      .side-toggle-group {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: flex-start;
+      
+        .toggle-btn {
+          background: none;
+          border: none;
+          font-size: 18px;
+          cursor: pointer;
+          padding: 5px;
+          transition: all 0.3s ease;
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--light-action-color);
+      
+          &.heating.active {
+            color: mix(red, white, 50%);
             background-color: var(--primary-color);
-            color: red;
-            transform: scale(1.05);
+            transform: scale(1.1);
           }
-      }
-  
-      &.cooling {
-        &.active {
+      
+          &.cooling.active {
+            color: mix(blue, white, 50%);
             background-color: var(--primary-color);
-            color: blue;
-            transform: scale(1.05);
-          } 
+            transform: scale(1.1);
+          }
+        }
+      
+        &.horizontal {
+          flex-direction: row;
+        }
+      }      
+    }    
+    
+  
+    .recent-spaces {
+      margin-top: 20px;
+  
+      .space-row {
+        display: grid;
+        grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr;
+        padding: 10px;
+        background: var(--tertiary-color);
+        border-radius: 4px;
+        align-items: center;
+        margin-bottom: 8px;
+  
+        &.header {
+          font-weight: bold;
+          background: var(--theme);
+          color: white;
+        }
+  
+        .delete-btn {
+          background: none;
+          border: none;
+          color: var(--light-action-color);
+          cursor: pointer;
+  
+          &:hover {
+            color: red;
+          }
+        }
+  
+        .active-icon {
+          color: mix(white, red, 60%);
+        }
       }
     }
   }
+  
   
   

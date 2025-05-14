@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal" [class.show]="show" (click)="close()">
-  <div class="modal-dialog" (click)="$event.stopPropagation()">
+  <div class="modal-dialog" [ngStyle]="{ width: width }" (click)="$event.stopPropagation()">
     <div class="modal-content">
       
       <!-- Modal Header -->

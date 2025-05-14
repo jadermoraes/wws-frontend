@@ -1,7 +1,9 @@
 <div class="spaces-container">
-  <div class="add-space-div">
-    <button wwsBtn="primary" class="m-b-md" (click)="openAddSpaceModal()">+ Add Space</button>
-  </div>
+  <div class="add-space-inline">
+    <button class="btn-add-space" (click)="openAddSpaceModal()">
+      <i class="fa fa-plus"></i> Add Space
+    </button>
+  </div>  
 
   <div *ngFor="let group of groupedSpaces | keyvalue" class="space-group">
     <div *ngIf="showGroup(group.key)">
@@ -53,69 +55,69 @@
     </div>
   </div>
   <app-modal
-    class="spaces-modal"
+    class="spaces-modal wide"
     [show]="showAddSpaceModal"
-    [title]="selectingGroup ? 'Select Space Type' : 'Add New Space'"
+    [title]="'Add New Space'"
+    [width]="'600px'" 
     [actions]="[
       { title: 'Cancel', type: 'secondary', position: 'left', action: this.closeAddSpaceModal.bind(this) },
-      { title: 'Add', type: 'primary', position: 'right', action: this.addNewSpace.bind(this), disabled: newSpace.length <= 0 || newSpace.width <= 0 }
+      { title: 'Add', type: 'primary', position: 'right', action: this.addNewSpace.bind(this), disabled: newSpace.length <= 0 || newSpace.width <= 0 },
+      { title: 'Add and Clear', type: 'primary', position: 'right', action: this.addNewSpaceAndClear.bind(this), disabled: newSpace.length <= 0 || newSpace.width <= 0 }
     ]"
     (onClose)="closeAddSpaceModal()"
   >
-    <!-- Space Group Selection (Fades Out First) -->
-  <div *ngIf="selectingGroup" class="modal-body space-group-selection animate-fade f-d-r" @fadeOut>
-    <button class="group-option" (click)="selectSpaceGroup('main-spaces')">
-      <i class="fa fa-home"></i>
-      <span>Main Spaces</span>
-    </button>
+  <div class="modal-body full-body">
+    <!-- Group Selector -->
+    <div class="group-tabs">
+      <button class="group-tab" *ngFor="let group of spaceGroups"
+              [class.active]="newSpace.group === group.id"
+              (click)="selectSpaceGroup(group.id)">
+        <i class="fa" [ngClass]="{
+          'fa-home': group.id === 'main-spaces',
+          'fa-warehouse': group.id === 'other-spaces',
+          'fa-tree': group.id === 'outdoor-spaces'
+        }"></i>
+        <span>{{ group.name }}</span>
+      </button>
+    </div>
 
-    <button class="group-option" (click)="selectSpaceGroup('other-spaces')">
-      <i class="fa fa-warehouse"></i>
-      <span>Other Spaces</span>
-    </button>
+    <!-- Input Form -->
+    <div class="form-area">
+      <div>
+        <label class="m-b-sm">Type</label>
+        <select [(ngModel)]="newSpace.type" class="form-control">
+          <option *ngFor="let type of getGroupOptions(newSpace.group)" [value]="type.id">{{ type.label }}</option>
+        </select>
+      </div>
 
-    <button class="group-option" (click)="selectSpaceGroup('outdoor-spaces')">
-      <i class="fa fa-tree"></i>
-      <span>Outdoor Spaces</span>
-    </button>
-  </div>
-
-  <!-- Modal Grow Effect -->
-  <div *ngIf="!selectingGroup" class="modal-body flex-direction animate-fade" @modalGrow>
-
-    <!-- Space Details Form (Fades In After Modal Grows) -->
-    <div *ngIf="!selectingGroup" @fadeIn>
-      <label class="m-b-sm" for="type">Type</label>
-      <select id="type" [(ngModel)]="newSpace.type" class="form-control">
-        <option *ngFor="let type of getGroupOptions(newSpace.group)" [value]="type.id">{{ type.label }}</option>
-      </select>
-
-      <div class="dimension-group m-t-md">
-        <div>
-          <label class="m-b-sm" for="length">Length (m)</label>
-          <input id="length" type="number" [(ngModel)]="newSpace.length" (input)="calculateArea()" class="form-control" />
+      <div class="dimension-row m-b-md m-t-sm">
+        <div class="dimension-group">
+          <div>
+            <label class="m-b-sm">Length (m)</label>
+            <input type="number" [(ngModel)]="newSpace.length" (input)="calculateArea()" class="form-control" />
+          </div>
+          <div>
+            <label class="m-b-sm">Width (m)</label>
+            <input type="number" [(ngModel)]="newSpace.width" (input)="calculateArea()" class="form-control" />
+          </div>
+          <div>
+            <label class="m-b-sm">Area (m²)</label>
+            <input type="number" [(ngModel)]="newSpace.area" class="form-control" />
+          </div>
         </div>
-
-        <div>
-          <label class="m-b-sm" for="width">Width (m)</label>
-          <input id="width" type="number" [(ngModel)]="newSpace.width" (input)="calculateArea()" class="form-control" />
-        </div>
-
-        <div>
-          <label class="m-b-sm" for="area">Area (m²)</label>
-          <input id="area" type="number" [(ngModel)]="newSpace.area" class="form-control" />
-        </div>
-
-        <div *ngIf="showHeatingCooling(newSpace.group)" class="toggle-group m-t-lg">
+      
+        <!-- Heating / Cooling icons on the side -->
+        <div *ngIf="showHeatingCooling(newSpace.group)" class="side-toggle-group horizontal">
           <button class="toggle-btn heating" [class.active]="newSpace.heating" (click)="newSpace.heating = !newSpace.heating">
-            <i class="fa fa-fire"></i> 
+            <i class="fa fa-fire"></i>
           </button>
           <button class="toggle-btn cooling" [class.active]="newSpace.cooling" (click)="newSpace.cooling = !newSpace.cooling">
-            <i class="fa fa-snowflake"></i> 
+            <i class="fa fa-snowflake"></i>
           </button>
         </div>
       </div>
+      
     </div>
   </div>
-  </app-modal>
+</app-modal>
 </div>

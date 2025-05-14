@@ -3,6 +3,7 @@ import { CalculationService } from '../calculation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { ConfirmationService } from 'src/app/shared/services/confirmation.service';
+import { TableData } from 'src/app/shared/interfaces/tableData';
 
 @Component({
   selector: 'app-calculation-overview',
@@ -12,6 +13,8 @@ import { ConfirmationService } from 'src/app/shared/services/confirmation.servic
 export class CalculationOverviewComponent implements OnInit {
   data = null;
   calculationId: string = '';
+  logs: any = null;
+
 
   constructor(private route: ActivatedRoute,
       private calculationService: CalculationService,
@@ -37,6 +40,14 @@ export class CalculationOverviewComponent implements OnInit {
       next: (data) => {
         if (data.success && data.result) {
           this.data = data.result;
+        }
+      }
+    });
+
+    this.calculationService.getCalculationLogs(calculationId).subscribe({
+      next: (data) => {
+        if (data.success && data.result) {
+          this.logs = data.result;
         }
       }
     });
@@ -78,4 +89,25 @@ export class CalculationOverviewComponent implements OnInit {
       this.router.navigate([`/calculations/${property}/new`]);
     }
   }
+
+  get spacesLogs() {
+    return this.logs?.filter(l => l.logType === 'spaces') || [];
+  }
+  
+  get additionalLogs() {
+    return this.logs?.filter(l => l.logType === 'additional') || [];
+  }
+  
+  get wozLogs() {
+    return this.logs?.filter(l => l.logType === 'woz') || [];
+  }
+  
+  get totalLog() {
+    return this.logs?.find(l => l.logType === 'total');
+  }
+
+  get energyLogs() {    
+    return this.logs?.filter(l => l.logType === 'energy');
+  }
+  
 }

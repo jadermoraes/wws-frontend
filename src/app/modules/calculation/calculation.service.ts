@@ -71,4 +71,8 @@ export class CalculationService {
     getCalculationOverview(calculation: string): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}/${calculation}/overview`);
     }
+
+    getCalculationLogs(calculation: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/${calculation}/logs`);
+    }
 }

@@ -29,6 +29,9 @@ export class GeneralComponent implements OnDestroy {
   showElInfo = false;
   stepId: string = null;
   wozFetched: boolean = false;
+  loadingWoz = false;
+  loadingEl = false;
+
 
 
   data: any = null;
@@ -162,21 +165,29 @@ export class GeneralComponent implements OnDestroy {
 
 
   loadWozValues(): void {
-    this.calculationService.getWozValues(this.calculationId).subscribe((data) => {
-      if (data.success) {
-        if (data.wozData) {
-          this.wozAmounts = data.wozData;
-          if (this.wozAmounts.length > 0 && !this.selectedWozValue) {
-            this.selectedWozValue = this.wozAmounts[0].period;
-          }
+    this.loadingWoz = true;
+    this.calculationService.getWozValues(this.calculationId).subscribe({
+      next: (data) => {
+        if (data.success) {
+          if (data.wozData) {
+            this.wozAmounts = data.wozData;
+            if (this.wozAmounts.length > 0 && !this.selectedWozValue) {
+              this.selectedWozValue = this.wozAmounts[0].period;
+            }
+          } else {
+            this.showAddressSelectionModal(data.addresses);
+          }          
         } else {
-          this.showAddressSelectionModal(data.addresses);
-        }          
-      } else {
-        this.toastService.warning(data.message);
+          this.toastService.warning(data.message);
+        }
+      },
+      error: () => {
+        this.toastService.warning('Failed to fetch WOZ values');
+      },
+      complete: () => {
+        this.wozFetched = true;
+        this.loadingWoz = false;
       }
-
-      this.wozFetched = true;
     });
   }
 
@@ -190,17 +201,21 @@ export class GeneralComponent implements OnDestroy {
       return;
     }
   
-    this.calculationService.getElData(this.calculationId).subscribe((data) => {
-      if (data.success) {
-        if (data.elData) {
+    this.loadingEl = true;
+    this.calculationService.getElData(this.calculationId).subscribe({
+      next: (data) => {
+        if (data.success && data.elData) {
           this.energyLabelApiData = data.elData;
-
           this.applyEnergyLabelRules(this.energyLabelApiData);
         } else {
-          this.toastService.warning('No energy label data found for this address.');
+          this.toastService.warning(data.message || 'No energy label data found.');
         }
-      } else {
-        this.toastService.warning(data.message || 'Could not retrieve energy label data.');
+      },
+      error: () => {
+        this.toastService.warning('Could not retrieve energy label data.');
+      },
+      complete: () => {
+        this.loadingEl = false;
       }
     });
   }

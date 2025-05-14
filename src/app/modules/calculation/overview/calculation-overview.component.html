@@ -31,6 +31,82 @@
       <button class="btn-back" (click)="exitPage()">Return to List</button>
     </div>
   </div>
+  
+  @if(logs){
+    <!-- <wws-table
+          [headers]="logs.headers"
+          [data]="logs.rows"
+        >
+          <p no-data>No Logs to display!</p>
+        </wws-table> -->
+      <div class="log-results">      
+          <!-- SPACES -->
+          <div class="log-card" *ngIf="spacesLogs.length > 0">
+            <h4 class="log-title">🧱 Spaces</h4>
+            <div *ngFor="let item of spacesLogs">
+              <div class="entry-header space-name">{{ item.typeDesc }}</div>
+              <div class="entry-header">{{ item.detail }} <span class="value">+{{ item.points | number:'1.2-2' }} pts</span></div>
+              
+              <!-- Kitchens -->
+              <div *ngIf="item.kitchens?.length" class="entry-list">
+                <div class="section-label">🍳 Kitchens</div>
+                <div *ngFor="let kitchen of item.kitchens" class="log-entry">
+                  {{ kitchen.detail }} <span class="value">+{{ kitchen.points }} pts</span>
+                  <div *ngIf="kitchen.facilities?.length" class="entry-sublist">
+                    <div *ngFor="let f of kitchen.facilities">
+                      <span class="arrow">↳</span> {{ f.detail }} <span class="value">+{{ f.points | number:'1.2-2' }} pts</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Toilets -->
+              <div *ngIf="item.toilets?.length" class="entry-list">
+                <div class="section-label">🚽 Toilets</div>
+                <div *ngFor="let toilet of item.toilets" class="log-entry">
+                  {{ toilet.detail }} <span class="value">+{{ toilet.points }} pts</span>
+                  <div *ngIf="toilet.facilities?.length" class="entry-sublist">
+                    <div *ngFor="let f of toilet.facilities">
+                      <span class="arrow">↳</span> {{ f.detail }} <span class="value">+{{ f.points | number:'1.2-2' }} pts</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ENERGY-->
+          <div class="log-card" *ngIf="energyLogs.length > 0">
+            <h4 class="log-title">⚡ Energy</h4>
+            <div *ngFor="let item of energyLogs">
+              {{ item.detail }} <span class="value">+{{ item.points | number:'1.2-2' }} pts</span>
+            </div>
+          </div>
+
+          <!-- ADDITIONAL -->
+          <div class="log-card" *ngIf="additionalLogs.length > 0">
+            <h4 class="log-title">➕ Additional</h4>
+            <div *ngFor="let item of additionalLogs">
+              {{ item.detail }} <span class="value">+{{ item.points | number:'1.2-2' }} pts</span>
+            </div>
+          </div>
+
+          <!-- WOZ -->
+          <div class="log-card" *ngIf="wozLogs.length > 0">
+            <h4 class="log-title">🏠 WOZ</h4>
+            <div *ngFor="let item of wozLogs">
+              {{ item.detail }} <span class="value">+{{ item.points | number:'1.2-2' }} pts</span>
+            </div>
+          </div>
+
+          <!-- TOTAL -->
+          <div class="log-total" *ngIf="totalLog">
+            Total Points: {{ totalLog.points | number:'1.2-2' }}
+          </div>
+
+      </div>
+        
+  }
 } @else {
     <div class="no-data">
       <h2>No calculation data available</h2>

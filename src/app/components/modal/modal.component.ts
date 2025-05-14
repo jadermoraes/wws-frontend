@@ -18,6 +18,7 @@ export class ModalComponent implements OnChanges {
   @Input() show: boolean = false;
   @Input() actions: ModalAction[] = [];
   @Output() onClose = new EventEmitter<void>();
+  @Input() width: string = '500px';
 
   leftActions: ModalAction[] = [];
   centerActions: ModalAction[] = [];

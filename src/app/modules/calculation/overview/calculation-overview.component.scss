@@ -41,7 +41,7 @@
   .calculation-details {
     flex: 2;
     padding: 25px;
-    background: var(--secondary-color);
+    background: var(--terciary-color);
     border-radius: 10px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -59,11 +59,11 @@
   }
   
   .detail-item {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--secondary-color);
     padding: 15px;
     border-radius: 8px;
     font-size: 16px;
-    color: white;
+    color: var(--primary-font-color);
   }
   
   .edit-price {
@@ -94,5 +94,85 @@
   
   .btn-modify:hover, .btn-export:hover, .btn-remove:hover, .btn-additional:hover {
     filter: brightness(1.2);
+  }
+
+
+  
+  .log-results {
+    width: 80%;
+    max-width: 1200px;
+    margin: 40px auto;
+    font-size: 13px;
+    color: white;
+  }
+  
+  .log-card {
+    background: var(--primary-color);
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  .log-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .section-label {
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: var(--tertiary-color);
+  }
+  
+  .log-entry {
+    margin-left: 10px;
+    padding-left: 8px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 6px;
+  }
+  
+  .entry-sublist {
+    margin-left: 12px;
+    font-size: 12px;
+    color: #ccc;
+  }
+  
+  .arrow {
+    margin-right: 6px;
+    color: var(--theme);
+  }
+  
+  .value {
+    float: right;
+    font-weight: 500;
+    color: #ffc107;
+  }
+  
+  .log-total {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #ffc107;
+  }
+  
+  .space-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--primary-font-color);
+    letter-spacing: 0.5px;
   }
   
